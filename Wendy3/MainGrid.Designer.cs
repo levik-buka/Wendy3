@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainGrid));
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.selectedSumStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tulostaBtn = new System.Windows.Forms.Button();
             this.asetuksetBtn = new System.Windows.Forms.Button();
@@ -45,8 +46,6 @@
             this.Käyttömaksut = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tasauslasku = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Loppusumma = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ALV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.selectedSumStatus = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -69,12 +68,11 @@
             this.Perusmaksut,
             this.Käyttömaksut,
             this.Tasauslasku,
-            this.Loppusumma,
-            this.ALV});
+            this.Loppusumma});
             this.dataGridView.Location = new System.Drawing.Point(129, 10);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
-            this.dataGridView.Size = new System.Drawing.Size(889, 441);
+            this.dataGridView.Size = new System.Drawing.Size(819, 441);
             this.dataGridView.TabIndex = 0;
             // 
             // statusStrip
@@ -83,9 +81,15 @@
             this.selectedSumStatus});
             this.statusStrip.Location = new System.Drawing.Point(0, 455);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1030, 22);
+            this.statusStrip.Size = new System.Drawing.Size(960, 22);
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip";
+            // 
+            // selectedSumStatus
+            // 
+            this.selectedSumStatus.Name = "selectedSumStatus";
+            this.selectedSumStatus.Size = new System.Drawing.Size(28, 17);
+            this.selectedSumStatus.Text = "0.00";
             // 
             // groupBox1
             // 
@@ -192,39 +196,25 @@
             // 
             // Loppusumma
             // 
-            this.Loppusumma.HeaderText = "Loppusumma";
+            this.Loppusumma.HeaderText = "Loppusumma alviton/alvillinen";
             this.Loppusumma.Name = "Loppusumma";
             this.Loppusumma.ReadOnly = true;
             this.Loppusumma.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Loppusumma.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ALV
-            // 
-            this.ALV.HeaderText = "ALV";
-            this.ALV.Name = "ALV";
-            this.ALV.ReadOnly = true;
-            this.ALV.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ALV.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ALV.Width = 70;
-            // 
-            // selectedSumStatus
-            // 
-            this.selectedSumStatus.Name = "selectedSumStatus";
-            this.selectedSumStatus.Size = new System.Drawing.Size(28, 17);
-            this.selectedSumStatus.Text = "0.00";
             // 
             // MainGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1030, 477);
+            this.ClientSize = new System.Drawing.Size(960, 477);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dataGridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainGrid";
             this.Text = "Wendy 3";
+            this.Load += new System.EventHandler(this.MainGrid_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
@@ -243,6 +233,7 @@
         private System.Windows.Forms.Button asetuksetBtn;
         private System.Windows.Forms.Button tasauslaskuBtn;
         private System.Windows.Forms.Button arviolaskuBtn;
+        private System.Windows.Forms.ToolStripStatusLabel selectedSumStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Aikajakso;
         private System.Windows.Forms.DataGridViewTextBoxColumn Asunto;
@@ -252,8 +243,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Käyttömaksut;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Tasauslasku;
         private System.Windows.Forms.DataGridViewTextBoxColumn Loppusumma;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ALV;
-        private System.Windows.Forms.ToolStripStatusLabel selectedSumStatus;
     }
 }
 

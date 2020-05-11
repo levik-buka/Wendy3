@@ -52,6 +52,24 @@
     <Compile Include="MainGrid.Designer.cs">
       <DependentUpon>MainGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\BasicFeeConfig.cs" />
+    <Compile Include="Model\FeeConfig.cs" />
+    <Compile Include="Model\InvoiceHistory.cs" />
+    <Compile Include="Model\ConsumptionValue.cs" />
+    <Compile Include="Model\DateRange.cs" />
+    <Compile Include="Model\ConsumptionReadOut.cs" />
+    <Compile Include="Model\Invoice.cs" />
+    <Compile Include="Model\InvoiceShared.cs" />
+    <Compile Include="Model\MeterConfig.cs" />
+    <Compile Include="Model\MeterConfigHistory.cs" />
+    <Compile Include="Model\UserInvoice.cs" />
+    <Compile Include="Model\UserMeterConfigHistory.cs" />
+    <Compile Include="Model\WaterFee.cs" />
+    <Compile Include="Model\Wendy1\OldConfig.cs" />
+    <Compile Include="Model\Wendy1\OldConfigFee.cs" />
+    <Compile Include="Model\Wendy1\OldInvoices.cs" />
+    <Compile Include="Model\Wendy1\OldUserNames.cs" />
+    <Compile Include="Model\Wendy1\OldUsers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainGrid.resx">
@@ -80,5 +98,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -16,5 +16,10 @@ namespace Wendy
         {
             InitializeComponent();
         }
+
+        private void MainGrid_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

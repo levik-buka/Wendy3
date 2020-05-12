@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<ElectraData>
+	<Invoices Id="0">
+		<StartDate>2007-08-18T00:00:00+03:00</StartDate>
+		<EndDate>2007-12-19T00:00:00+02:00</EndDate>
+		<Consumption>76</Consumption>
+		<WaterFee>79.04</WaterFee>
+		<WasteFee>101.84</WasteFee>
+		<BasicFee>11.24</BasicFee>
+		<Balanced>true</Balanced>
+	</Invoices>
+	<Invoices Id="1">
+		<StartDate>2007-12-20T00:00:00+02:00</StartDate>
+		<EndDate>2007-12-31T00:00:00+02:00</EndDate>
+		<Consumption>91</Consumption>
+		<WaterFee>18.72</WaterFee>
+		<WasteFee>24.12</WasteFee>
+		<BasicFee>1.09</BasicFee>
+		<Estimation>18</Estimation>
+	</Invoices>
+	<Invoices Id="6">
+		<StartDate>2008-01-01T12:46:39+02:00</StartDate>
+		<EndDate>2008-03-31T12:46:39+03:00</EndDate>
+		<Consumption>140</Consumption>
+		<WaterFee>78.44</WaterFee>
+		<WasteFee>100.64</WasteFee>
+		<BasicFee>8.67</BasicFee>
+		<Balanced>false</Balanced>
+		<Estimation>74</Estimation>
+	</Invoices>
+	<Invoices Id="8">
+		<StartDate>2007-12-20T18:39:13+02:00</StartDate>
+		<EndDate>2008-04-30T18:39:13+03:00</EndDate>
+		<Consumption>151</Consumption>
+		<WaterFee>79.36</WaterFee>
+		<WasteFee>101.86</WasteFee>
+		<BasicFee>12.61</BasicFee>
+		<Balanced>true</Balanced>
+		<Estimation>0</Estimation>
+	</Invoices>
+	<Invoices Id="9">
+		<StartDate>2008-05-01T18:41:03+03:00</StartDate>
+		<EndDate>2008-06-30T18:41:03+03:00</EndDate>
+		<Consumption>199</Consumption>
+		<WaterFee>38.16</WaterFee>
+		<WasteFee>48.96</WasteFee>
+		<BasicFee>5.81</BasicFee>
+		<Balanced>false</Balanced>
+		<Estimation>36</Estimation>
+	</Invoices>
+	<Invoices Id="10">
+		<StartDate>2008-07-01T18:26:24+03:00</StartDate>
+		<EndDate>2008-09-30T18:26:24+03:00</EndDate>
+		<Consumption>240</Consumption>
+		<WaterFee>57.24</WaterFee>
+		<WasteFee>73.44</WasteFee>
+		<BasicFee>8.76</BasicFee>
+		<Balanced>false</Balanced>
+		<Estimation>54</Estimation>
+	</Invoices>
+	<Invoices Id="11">
+		<StartDate>2008-10-01T15:38:58+03:00</StartDate>
+		<EndDate>2008-12-31T15:38:58+02:00</EndDate>
+		<Consumption>290</Consumption>
+		<WaterFee>57.24</WaterFee>
+		<WasteFee>73.44</WasteFee>
+		<BasicFee>8.76</BasicFee>
+		<Balanced>false</Balanced>
+		<Estimation>54</Estimation>
+	</Invoices>
+	<Invoices Id="12">
+		<StartDate>2009-01-01T14:50:17+02:00</StartDate>
+		<EndDate>2009-03-31T14:50:17+03:00</EndDate>
+		<Consumption>337</Consumption>
+		<WaterFee>57.24</WaterFee>
+		<WasteFee>73.14</WasteFee>
+		<BasicFee>8.74</BasicFee>
+		<Balanced>false</Balanced>
+		<Estimation>53</Estimation>
+	</Invoices>
+	<Invoices Id="13">
+		<StartDate>2008-05-01T22:44:49+03:00</StartDate>
+		<EndDate>2009-04-30T22:44:49+03:00</EndDate>
+		<Consumption>364</Consumption>
+		<WaterFee>227.18</WaterFee>
+		<WasteFee>291.08</WasteFee>
+		<BasicFee>34.99</BasicFee>
+		<Balanced>true</Balanced>
+		<Estimation>0</Estimation>
+	</Invoices>
+	<Invoices Id="14">
+		<StartDate>2009-05-01T22:52:51+03:00</StartDate>
+		<EndDate>2009-06-30T22:52:51+03:00</EndDate>
+		<Consumption>399</Consumption>
+		<WaterFee>38.88</WaterFee>
+		<WasteFee>49.68</WasteFee>
+		<BasicFee>5.93</BasicFee>
+		<Balanced>false</Balanced>
+		<Estimation>36</Estimation>
+	</Invoices>
+	<Invoices Id="15">
+		<StartDate>2009-07-01T17:54:44+03:00</StartDate>
+		<EndDate>2009-09-30T17:54:44+03:00</EndDate>
+		<Consumption>443</Consumption>
+		<WaterFee>58.32</WaterFee>
+		<WasteFee>74.52</WasteFee>
+		<BasicFee>8.94</BasicFee>
+		<Balanced>false</Balanced>
+		<Estimation>54</Estimation>
+	</Invoices>
+	<Invoices Id="16">
+		<StartDate>2009-10-01T17:35:43+03:00</StartDate>
+		<EndDate>2009-12-31T17:35:43+02:00</EndDate>
+		<Consumption>495</Consumption>
+		<WaterFee>58.32</WaterFee>
+		<WasteFee>74.52</WasteFee>
+		<BasicFee>8.94</BasicFee>
+		<Balanced>false</Balanced>
+		<Estimation>54</Estimation>
+	</Invoices>
+	<Invoices Id="17">
+		<StartDate>2009-05-01T18:42:56+03:00</StartDate>
+		<EndDate>2009-12-31T18:42:56+02:00</EndDate>
+		<Consumption>509</Consumption>
+		<WaterFee>156.6</WaterFee>
+		<WasteFee>200.1</WasteFee>
+		<BasicFee>23.8</BasicFee>
+		<Balanced>true</Balanced>
+		<Estimation>0</Estimation>
+	</Invoices>
+	<Invoices Id="18">
+		<StartDate>2010-01-01T19:14:58+02:00</StartDate>
+		<EndDate>2010-03-31T19:14:58+03:00</EndDate>
+		<Consumption>584</Consumption>
+		<WaterFee>56.18</WaterFee>
+		<WasteFee>71.02</WasteFee>
+		<BasicFee>8.46</BasicFee>
+		<Balanced>false</Balanced>
+		<Estimation>53</Estimation>
+	</Invoices>
+	<Users Id="0">
+		<User>Apartment B</User>
+		<Consumption>28</Consumption>
+		<WaterFee>29.12</WaterFee>
+		<WasteFee>37.52</WasteFee>
+		<BasicFee>5.62</BasicFee>
+		<Balanced>true</Balanced>
+	</Users>
+	<Users Id="0">
+		<User>Apartment A</User>
+		<Consumption>48</Consumption>
+		<WaterFee>49.92</WaterFee>
+		<WasteFee>64.32</WasteFee>
+		<BasicFee>5.62</BasicFee>
+		<Balanced>true</Balanced>
+	</Users>
+	<Users Id="1">
+		<User>Apartment B</User>
+		<Consumption>34</Consumption>
+		<WaterFee>8.32</WaterFee>
+		<WasteFee>10.72</WasteFee>
+		<BasicFee>0.55</BasicFee>
+	</Users>
+	<Users Id="1">
+		<User>Apartment A</User>
+		<Consumption>57</Consumption>
+		<WaterFee>10.4</WaterFee>
+		<WasteFee>13.4</WasteFee>
+		<BasicFee>0.54</BasicFee>
+	</Users>
+	<Users Id="6">
+		<User>Apartment B</User>
+		<Consumption>55</Consumption>
+		<WaterFee>33.92</WaterFee>
+		<WasteFee>43.52</WasteFee>
+		<BasicFee>4.33</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="6">
+		<User>Apartment A</User>
+		<Consumption>85</Consumption>
+		<WaterFee>44.52</WaterFee>
+		<WasteFee>57.12</WasteFee>
+		<BasicFee>4.34</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="8">
+		<User>Apartment B</User>
+		<Consumption>60</Consumption>
+		<WaterFee>33.87</WaterFee>
+		<WasteFee>43.47</WasteFee>
+		<BasicFee>6.3</BasicFee>
+		<Balanced>true</Balanced>
+	</Users>
+	<Users Id="8">
+		<User>Apartment A</User>
+		<Consumption>91</Consumption>
+		<WaterFee>45.49</WaterFee>
+		<WasteFee>58.39</WasteFee>
+		<BasicFee>6.31</BasicFee>
+		<Balanced>true</Balanced>
+	</Users>
+	<Users Id="9">
+		<User>Apartment B</User>
+		<Consumption>75</Consumption>
+		<WaterFee>11.66</WaterFee>
+		<WasteFee>14.96</WasteFee>
+		<BasicFee>2.91</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="9">
+		<User>Apartment A</User>
+		<Consumption>124</Consumption>
+		<WaterFee>26.5</WaterFee>
+		<WasteFee>34</WasteFee>
+		<BasicFee>2.9</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="10">
+		<User>Apartment B</User>
+		<Consumption>92</Consumption>
+		<WaterFee>23.32</WaterFee>
+		<WasteFee>29.92</WasteFee>
+		<BasicFee>4.38</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="10">
+		<User>Apartment A</User>
+		<Consumption>148</Consumption>
+		<WaterFee>33.92</WaterFee>
+		<WasteFee>43.52</WasteFee>
+		<BasicFee>4.38</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="11">
+		<User>Apartment B</User>
+		<Consumption>117</Consumption>
+		<WaterFee>28.62</WaterFee>
+		<WasteFee>36.72</WasteFee>
+		<BasicFee>4.38</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="11">
+		<User>Apartment A</User>
+		<Consumption>173</Consumption>
+		<WaterFee>28.62</WaterFee>
+		<WasteFee>36.72</WasteFee>
+		<BasicFee>4.38</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="12">
+		<User>Apartment B</User>
+		<Consumption>140</Consumption>
+		<WaterFee>28.08</WaterFee>
+		<WasteFee>35.88</WasteFee>
+		<BasicFee>4.37</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="12">
+		<User>Apartment A</User>
+		<Consumption>197</Consumption>
+		<WaterFee>29.16</WaterFee>
+		<WasteFee>37.26</WasteFee>
+		<BasicFee>4.37</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="13">
+		<User>Apartment B</User>
+		<Consumption>152</Consumption>
+		<WaterFee>98.18</WaterFee>
+		<WasteFee>125.78</WasteFee>
+		<BasicFee>17.5</BasicFee>
+		<Balanced>true</Balanced>
+	</Users>
+	<Users Id="13">
+		<User>Apartment A</User>
+		<Consumption>212</Consumption>
+		<WaterFee>129</WaterFee>
+		<WasteFee>165.29</WasteFee>
+		<BasicFee>17.5</BasicFee>
+		<Balanced>true</Balanced>
+	</Users>
+	<Users Id="14">
+		<User>Apartment B</User>
+		<Consumption>167</Consumption>
+		<WaterFee>16.2</WaterFee>
+		<WasteFee>20.7</WasteFee>
+		<BasicFee>2.96</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="14">
+		<User>Apartment A</User>
+		<Consumption>232</Consumption>
+		<WaterFee>22.68</WaterFee>
+		<WasteFee>28.98</WasteFee>
+		<BasicFee>2.97</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="15">
+		<User>Apartment B</User>
+		<Consumption>187</Consumption>
+		<WaterFee>27</WaterFee>
+		<WasteFee>34.5</WasteFee>
+		<BasicFee>4.47</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="15">
+		<User>Apartment A</User>
+		<Consumption>256</Consumption>
+		<WaterFee>31.32</WaterFee>
+		<WasteFee>40.02</WasteFee>
+		<BasicFee>4.47</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="16">
+		<User>Apartment B</User>
+		<Consumption>208</Consumption>
+		<WaterFee>23.76</WaterFee>
+		<WasteFee>30.36</WasteFee>
+		<BasicFee>4.47</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="16">
+		<User>Apartment A</User>
+		<Consumption>287</Consumption>
+		<WaterFee>34.56</WaterFee>
+		<WasteFee>44.16</WasteFee>
+		<BasicFee>4.47</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="17">
+		<User>Apartment B</User>
+		<Consumption>218</Consumption>
+		<WaterFee>71.28</WaterFee>
+		<WasteFee>91.08</WasteFee>
+		<BasicFee>11.9</BasicFee>
+		<Balanced>true</Balanced>
+	</Users>
+	<Users Id="17">
+		<User>Apartment A</User>
+		<Consumption>291</Consumption>
+		<WaterFee>85.32</WaterFee>
+		<WasteFee>109.02</WasteFee>
+		<BasicFee>11.9</BasicFee>
+		<Balanced>true</Balanced>
+	</Users>
+	<Users Id="18">
+		<User>Apartment B</User>
+		<Consumption>249</Consumption>
+		<WaterFee>23.32</WaterFee>
+		<WasteFee>29.48</WasteFee>
+		<BasicFee>4.23</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<Users Id="18">
+		<User>Apartment A</User>
+		<Consumption>335</Consumption>
+		<WaterFee>32.86</WaterFee>
+		<WasteFee>41.54</WasteFee>
+		<BasicFee>4.23</BasicFee>
+		<Balanced>false</Balanced>
+	</Users>
+	<UserNames Name="Apartment B">
+		<StartConsumption>0</StartConsumption>
+	</UserNames>
+	<UserNames Name="Apartment A">
+		<StartConsumption>0</StartConsumption>
+	</UserNames>
+	<ConfigFee End="2007-12-31T00:00:00+02:00">
+		<WaterFee>1.04</WaterFee>
+		<WasteFee>1.34</WasteFee>
+		<VAT>22</VAT>
+	</ConfigFee>
+	<ConfigFee Begin="2008-01-01T00:00:00+02:00" End="2008-12-31T00:00:00+02:00">
+		<WaterFee>1.06</WaterFee>
+		<WasteFee>1.36</WasteFee>
+		<VAT>22</VAT>
+	</ConfigFee>
+	<ConfigFee Begin="2009-01-01T00:00:00+02:00" End="2009-12-31T00:00:00+02:00">
+		<WaterFee>1.08</WaterFee>
+		<WasteFee>1.38</WasteFee>
+		<VAT>22</VAT>
+	</ConfigFee>
+	<ConfigFee Begin="2010-01-01T00:00:00+02:00">
+		<WaterFee>1.06</WaterFee>
+		<WasteFee>1.34</WasteFee>
+		<VAT>22</VAT>
+	</ConfigFee>
+	<Config>
+		<StartConsumption>0</StartConsumption>
+	</Config>
+</ElectraData>

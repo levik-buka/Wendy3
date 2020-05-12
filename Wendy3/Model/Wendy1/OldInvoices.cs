@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Wendy.Model.Wendy1
 {
     public class OldInvoices
     {
+        [XmlAttribute]
         public long Id { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

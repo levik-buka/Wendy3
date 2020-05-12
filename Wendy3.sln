@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wendy3", "Wendy3\Wendy3.csproj", "{82444CD6-5061-4893-A9AD-B3A69893D803}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wendy3Tests", "Wendy3Tests\Wendy3Tests.csproj", "{8A0DD4C8-7E4A-4601-BBB3-89B8EF412955}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{82444CD6-5061-4893-A9AD-B3A69893D803}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82444CD6-5061-4893-A9AD-B3A69893D803}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82444CD6-5061-4893-A9AD-B3A69893D803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A0DD4C8-7E4A-4601-BBB3-89B8EF412955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A0DD4C8-7E4A-4601-BBB3-89B8EF412955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A0DD4C8-7E4A-4601-BBB3-89B8EF412955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A0DD4C8-7E4A-4601-BBB3-89B8EF412955}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

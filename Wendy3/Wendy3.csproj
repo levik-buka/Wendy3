@@ -70,8 +70,10 @@
     <Compile Include="Model\Wendy1\OldInvoices.cs" />
     <Compile Include="Model\Wendy1\OldUserNames.cs" />
     <Compile Include="Model\Wendy1\OldUsers.cs" />
+    <Compile Include="Model\Wendy1\OldWendyFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tasks\Utils\XML.cs" />
     <EmbeddedResource Include="MainGrid.resx">
       <DependentUpon>MainGrid.cs</DependentUpon>
     </EmbeddedResource>

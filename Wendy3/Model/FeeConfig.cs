@@ -8,8 +8,8 @@ namespace Wendy.Model
 {
     public class FeeConfig : DateRange
     {
-        public BasicFeeConfig MonthlyBasicFee { get; set; }
-        public WaterFee MonthlyUsageFee { get; set; }
+        public BasicFeeConfig MonthlyBasicFee { get; set; } = new BasicFeeConfig(0, 0, 0);
+        public WaterFee MonthlyUsageFee { get; set; } = new WaterFee(0, 0);
         public decimal VAT { get; set; }
         public bool VATIncludedIntoMonthlyFees { get; set; }
     }

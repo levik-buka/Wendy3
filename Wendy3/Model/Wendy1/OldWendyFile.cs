@@ -12,12 +12,12 @@ namespace Wendy.Model.Wendy1
     {
         public OldConfig Config { get; set; }
         [XmlElement("Invoices")]
-        public List<OldInvoices> Invoices { get; set; }
+        public List<OldInvoices> Invoices { get; } = new List<OldInvoices>();
         [XmlElement("Users")]
-        public List<OldUsers> Users { get; set; }
+        public List<OldUsers> Users { get; } = new List<OldUsers>();
         [XmlElement("UserNames")]
-        public List<OldUserNames> UserNames { get; set; }
+        public List<OldUserNames> UserNames { get; } = new List<OldUserNames>();
         [XmlElement("ConfigFee")]
-        public List<OldConfigFee> ConfigFees { get; set; }
+        public List<OldConfigFee> ConfigFees { get; } = new List<OldConfigFee>();
     }
 }

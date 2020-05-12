@@ -8,6 +8,6 @@ namespace Wendy.Model
 {
     public class MeterConfigHistory
     {
-        public List<MeterConfig> MeterConfigs { get; set; }
+        public List<MeterConfig> MeterConfigs { get; } = new List<MeterConfig>();
     }
 }

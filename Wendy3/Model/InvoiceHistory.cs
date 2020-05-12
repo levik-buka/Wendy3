@@ -8,9 +8,9 @@ namespace Wendy.Model
 {
     public class InvoiceHistory
     {
-        public List<InvoiceShared> Invoices { get; set; }
-        public List<FeeConfig> FeeConfigHistory { get; set; }
-        public MeterConfigHistory MainMeterConfigHistory { get; set; }
-        public List<UserMeterConfigHistory> UserMeterConfigHistory { get; set; }
+        public List<InvoiceShared> Invoices { get; } = new List<InvoiceShared>();
+        public List<FeeConfig> FeeConfigHistory { get; } = new List<FeeConfig>();
+        public MeterConfigHistory MainMeterConfigHistory { get; set;  } = new MeterConfigHistory();
+        public List<UserMeterConfigHistory> UserMeterConfigHistory { get; } = new List<UserMeterConfigHistory>();
     }
 }

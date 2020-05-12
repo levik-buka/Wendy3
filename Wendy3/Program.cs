@@ -16,7 +16,10 @@ namespace Wendy
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainGrid());
+            using (var mainForm = new MainGrid())
+            {
+                Application.Run(mainForm);
+            }
         }
     }
 }

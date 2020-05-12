@@ -16,7 +16,7 @@ namespace Wendy.Tasks.Utils.Tests
         public void DeserializeWendyXMLTest()
         {
             string wendyXml = Resource.GetResourceAsString("Wendy.xml");
-            var wendyData = XML.DeserializeXML<Model.Wendy1.OldWendyFile>(wendyXml, nameSpace: null);
+            var wendyData = XmlUtil.DeserializeXML<Model.Wendy1.OldWendyFile>(wendyXml, nameSpace: null);
 
             Assert.AreEqual(0U, wendyData.Config.StartConsumption);
             

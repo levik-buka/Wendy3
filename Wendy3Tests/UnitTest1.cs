@@ -10,7 +10,7 @@ namespace Wendy3Tests
         public void UnitTest()
         {
             string wendyXml = Utils.Resource.GetResourceAsString("Wendy.xml");
-            var wendyData = Wendy.Tasks.Utils.XML.DeserializeXML<Wendy.Model.Wendy1.OldWendyFile>(wendyXml, nameSpace: null);
+            var wendyData = Wendy.Tasks.Utils.XmlUtil.DeserializeXML<Wendy.Model.Wendy1.OldWendyFile>(wendyXml, nameSpace: null);
 
             Assert.AreEqual(0U, wendyData.Config.StartConsumption);
             Assert.AreEqual(14, wendyData.Invoices.Count);

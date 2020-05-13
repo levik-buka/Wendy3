@@ -8,8 +8,8 @@ namespace Wendy.Model
 {
     public class WaterFee
     {
-        public decimal CleanWaterFee { get; }
-        public decimal WasteWaterFee { get; }
+        public decimal CleanWaterFee { get; set; }
+        public decimal WasteWaterFee { get; set; }
 
         public WaterFee(decimal cleanWaterFee, decimal wasteWaterFee)
         {

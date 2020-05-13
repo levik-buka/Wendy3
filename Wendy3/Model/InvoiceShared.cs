@@ -9,8 +9,8 @@ namespace Wendy.Model
 {
     public class InvoiceShared : DateRange
     {
-        private Invoice commonInvoice;
-        public List<UserInvoice> UserInvoices { get; }
+        private Invoice CommonInvoice { get; set; }
+        public List<UserInvoice> UserInvoices { get; } = new List<UserInvoice>();
 
         public InvoiceShared(long id, DateTime startDate, DateTime? endDate) 
         {
@@ -18,7 +18,7 @@ namespace Wendy.Model
             Start = startDate;
             End = endDate;
 
-            commonInvoice = new Invoice
+            CommonInvoice = new Invoice
             {
                 ReadOut = new ConsumptionReadOut(endDate ?? startDate, 0, 0)
             };
@@ -26,41 +26,36 @@ namespace Wendy.Model
 
         virtual public bool IsBalanced() { return false; }
 
+        public DateTime GetReadOutDate()
+        {
+            return CommonInvoice.ReadOut.ReadOutDate;
+        }
+
         public void SetReadOut(ulong estimatedReadout, ulong realReadOut)
         {
-            commonInvoice.ReadOut.ReadOut.Estimated = estimatedReadout;
-            commonInvoice.ReadOut.ReadOut.Real = realReadOut;
-
-            commonInvoice.ReadOut.ResetConsumption();
-            ResetReadOutOfUserInvoices();
+            CommonInvoice.ReadOut.SetReadOut(estimatedReadout, realReadOut);
+        }
+        public ConsumptionValue GetReadOut()
+        {
+            return CommonInvoice.ReadOut.GetReadOut();
         }
 
         public void SetBasicFee(decimal cleanWaterFee, decimal wasteWaterFee)
         {
-            commonInvoice.BasicFee = new WaterFee(cleanWaterFee, wasteWaterFee);
-            ResetFeesOfUserInvoices();
+            CommonInvoice.BasicFee = new WaterFee(cleanWaterFee, wasteWaterFee);
         }
+        public WaterFee GetBasicFee()
+        {
+            return CommonInvoice.BasicFee;
+        }
+
         public void SetUsageFee(decimal cleanWaterFee, decimal wasteWaterFee)
         {
-            commonInvoice.UsageFee = new WaterFee(cleanWaterFee, wasteWaterFee);
-            ResetFeesOfUserInvoices();
+            CommonInvoice.UsageFee = new WaterFee(cleanWaterFee, wasteWaterFee);
         }
-
-        private void ResetFeesOfUserInvoices()
+        public WaterFee GetUsageFee()
         {
-            UserInvoices?.ForEach(delegate(UserInvoice invoice) 
-            {
-                invoice.BasicFee = null;
-                invoice.UsageFee = null;
-            });
-        }
-
-        private void ResetReadOutOfUserInvoices()
-        {
-            UserInvoices?.ForEach(delegate(UserInvoice invoice) 
-            {
-                invoice.ReadOut.ResetReadOut();
-            });
+            return CommonInvoice.UsageFee;
         }
     }
 }

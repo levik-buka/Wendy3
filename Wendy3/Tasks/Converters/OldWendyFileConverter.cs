@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wendy.Tasks.Extensions;
 
 namespace Wendy.Tasks.Converters
 {
@@ -30,7 +31,28 @@ namespace Wendy.Tasks.Converters
                 invoiceHistory.Invoices.Add(ToInvoiceShared(invoice));
             }
 
+            foreach (var user in oldWendyData.Users)
+            {
+                Model.InvoiceShared sharedInvoice = invoiceHistory.Invoices.GetInvoiceById(user.InvoiceId);
+                sharedInvoice?.UserInvoices.Add(ToUserInvoice(sharedInvoice.GetReadOutDate(), user));
+            }
+
             return invoiceHistory;
+        }
+
+        private static Model.UserInvoice ToUserInvoice(DateTime readOutDate, Model.Wendy1.OldUsers user)
+        {
+            Contract.Requires(user != null);
+
+            var userInvoice = new Model.UserInvoice 
+            { 
+                InvoiceOwner = user.User,
+                ReadOut = new Model.ConsumptionReadOut(readOutDate, user.Consumption, user.Consumption),
+                BasicFee = new Model.WaterFee(user.BasicFee, 0),
+                UsageFee = new Model.WaterFee(user.WaterFee, user.WasteFee)
+            };
+
+            return userInvoice;
         }
 
         private static Model.InvoiceShared ToInvoiceShared(Model.Wendy1.OldInvoices invoice)

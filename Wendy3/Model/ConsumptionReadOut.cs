@@ -9,7 +9,7 @@ namespace Wendy.Model
     public class ConsumptionReadOut
     {
         public DateTime ReadOutDate { get; }
-        public ConsumptionValue ReadOut { get; }
+        private ConsumptionValue ReadOut { get; set; }
         public ConsumptionValue Consumption { get; private set; }
 
         public ConsumptionReadOut(DateTime readOutDate, ulong estimatedReadout, ulong realReadOut)
@@ -19,16 +19,16 @@ namespace Wendy.Model
             Consumption = null;
         }
 
-        public void ResetReadOut()
+        public void SetReadOut(ulong estimatedReadout, ulong realReadOut)
         {
-            ReadOut.Estimated = 0;
-            ReadOut.Real = 0;
-            ResetConsumption();
+            ReadOut.Estimated = estimatedReadout;
+            ReadOut.Real = realReadOut;
         }
 
-        public void ResetConsumption()
+        public ConsumptionValue GetReadOut()
         {
-            Consumption = null;
+            return ReadOut;
         }
+
     }
 }

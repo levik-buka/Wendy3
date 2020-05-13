@@ -47,30 +47,59 @@ namespace Wendy.Tasks.Converters.Tests
 
             Assert.AreEqual(14, invoiceHistory.Invoices.Count);
             {
-                int index = 0;
-                Assert.AreEqual(0, invoiceHistory.Invoices[index].Id);
-                Assert.AreEqual(true, invoiceHistory.Invoices[index].IsBalanced());
-                //Assert.AreEqual(0U, invoiceHistory.Invoices[index].GetReadOut());
+                Model.InvoiceShared invoice = invoiceHistory.Invoices[0];
+                Assert.AreEqual(0, invoice.Id);
+                Assert.AreEqual(new DateTime(2007, 08, 18), invoice.Start);
+                Assert.AreEqual(new DateTime(2007, 12, 19), invoice.End);
+                Assert.AreEqual(true, invoice.IsBalanced());
+                Assert.AreEqual(new DateTime(2007, 12, 19), invoice.GetReadOutDate());
+                Assert.AreEqual(0U, invoice.GetReadOut().Estimated);
+                Assert.AreEqual(76U, invoice.GetReadOut().Real);
+                Assert.AreEqual(11.24m, invoice.GetBasicFee().CleanWaterFee);
+                Assert.AreEqual(0m, invoice.GetBasicFee().WasteWaterFee);
+                Assert.AreEqual(79.04m, invoice.GetUsageFee().CleanWaterFee);
+                Assert.AreEqual(101.84m, invoice.GetUsageFee().WasteWaterFee);
             }
-            //{
-            //    int index = 1;
-            //    Assert.AreEqual(1, wendyData.Invoices[index].Id);
-            //    Assert.AreEqual(false, wendyData.Invoices[index].Balanced);
-            //    Assert.AreEqual(18U, wendyData.Invoices[index].Estimation);
-            //}
+            {
+                Model.InvoiceShared invoice = invoiceHistory.Invoices[1];
+                Assert.AreEqual(1, invoice.Id);
+                Assert.AreEqual(new DateTime(2007, 12, 20), invoice.Start);
+                Assert.AreEqual(new DateTime(2007, 12, 31), invoice.End);
+                Assert.AreEqual(false, invoice.IsBalanced());
+                Assert.AreEqual(new DateTime(2007, 12, 31), invoice.GetReadOutDate());
+                Assert.AreEqual(18U, invoice.GetReadOut().Estimated);
+                Assert.AreEqual(91U, invoice.GetReadOut().Real);
+                Assert.AreEqual(1.09m, invoice.GetBasicFee().CleanWaterFee);
+                Assert.AreEqual(0m, invoice.GetBasicFee().WasteWaterFee);
+                Assert.AreEqual(18.72m, invoice.GetUsageFee().CleanWaterFee);
+                Assert.AreEqual(24.12m, invoice.GetUsageFee().WasteWaterFee);
+            }
 
+            Assert.AreEqual(2, invoiceHistory.Invoices[0].UserInvoices.Count);
+            {
+                Model.UserInvoice userInvoice = invoiceHistory.Invoices[0].UserInvoices[1];
+                Assert.AreEqual("Apartment A", userInvoice.InvoiceOwner);
+                Assert.AreEqual(new DateTime(2007, 12, 19), userInvoice.ReadOut.ReadOutDate);
+                Assert.AreEqual(48U, userInvoice.ReadOut.GetReadOut().Estimated);
+                Assert.AreEqual(48U, userInvoice.ReadOut.GetReadOut().Real);
+                Assert.AreEqual(5.62m, userInvoice.BasicFee.CleanWaterFee);
+                Assert.AreEqual(0m, userInvoice.BasicFee.WasteWaterFee);
+                Assert.AreEqual(49.92m, userInvoice.UsageFee.CleanWaterFee);
+                Assert.AreEqual(64.32m, userInvoice.UsageFee.WasteWaterFee);
+            }
 
-            //Assert.AreEqual(28, wendyData.Users.Count);
-            //{
-            //    int index = 1;
-            //    Assert.AreEqual(0, wendyData.Users[index].InvoiceId);
-            //    Assert.AreEqual("Apartment A", wendyData.Users[index].User);
-            //}
-            //{
-            //    int index = 2;
-            //    Assert.AreEqual(1, wendyData.Users[index].InvoiceId);
-            //    Assert.AreEqual("Apartment B", wendyData.Users[index].User);
-            //}
+            Assert.AreEqual(2, invoiceHistory.Invoices[1].UserInvoices.Count);
+            {
+                Model.UserInvoice userInvoice = invoiceHistory.Invoices[1].UserInvoices[0];
+                Assert.AreEqual("Apartment B", userInvoice.InvoiceOwner);
+                Assert.AreEqual(new DateTime(2007, 12, 31), userInvoice.ReadOut.ReadOutDate);
+                Assert.AreEqual(34U, userInvoice.ReadOut.GetReadOut().Estimated);
+                Assert.AreEqual(34U, userInvoice.ReadOut.GetReadOut().Real);
+                Assert.AreEqual(0.55m, userInvoice.BasicFee.CleanWaterFee);
+                Assert.AreEqual(0m, userInvoice.BasicFee.WasteWaterFee);
+                Assert.AreEqual(8.32m, userInvoice.UsageFee.CleanWaterFee);
+                Assert.AreEqual(10.72m, userInvoice.UsageFee.WasteWaterFee);
+            }
         }
     }
 }

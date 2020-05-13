@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\InvoiceHistoryTests.cs" />
     <Compile Include="Tasks\Converters\OldWendyFileConverterTests.cs" />
     <Compile Include="Tasks\Utils\JsonUtilTests.cs" />
     <Compile Include="Tasks\Utils\XMLUtilTests.cs" />

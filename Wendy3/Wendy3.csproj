@@ -103,6 +103,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tasks\Converters\OldWendyFileConverter.cs" />
     <Compile Include="Tasks\Extensions\InvoiceExtensions.cs" />
+    <Compile Include="Tasks\Extensions\MeterConfigExtensions.cs" />
     <Compile Include="Tasks\Utils\JsonUtil.cs" />
     <Compile Include="Tasks\Utils\XmlUtil.cs" />
     <EmbeddedResource Include="MainGrid.resx">
@@ -154,6 +155,9 @@
     <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logic\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

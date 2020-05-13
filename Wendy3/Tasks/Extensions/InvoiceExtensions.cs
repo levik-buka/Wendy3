@@ -12,5 +12,10 @@ namespace Wendy.Tasks.Extensions
         {
             return invoices.Where(invoice => invoice.Id == id).FirstOrDefault();
         }
+
+        public static Model.InvoiceShared GetInvoiceByEndDate(this IEnumerable<Model.InvoiceShared> invoices, DateTime endDate)
+        {
+            return invoices.Where(invoice => invoice.End == endDate).FirstOrDefault();
+        }
     }
 }

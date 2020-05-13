@@ -19,5 +19,10 @@ namespace Wendy.Model
                 StartReadOut = 0U
             };
         }
+
+        public long GetConsumption()
+        {
+            return Convert.ToInt64((EndReadOut ?? 0L) - StartReadOut);
+        }
     }
 }

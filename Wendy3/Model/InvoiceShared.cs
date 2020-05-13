@@ -27,6 +27,11 @@ namespace Wendy.Model
             };
         }
 
+        public static InvoiceShared CreateEmpty()
+        {
+            return new InvoiceShared(0, new DateTime(), null);
+        }
+
         public DateTime GetReadOutDate()
         {
             return CommonInvoice.ReadOut.ReadOutDate;

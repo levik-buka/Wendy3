@@ -10,7 +10,7 @@ using Wendy3Tests.Utils;
 namespace Wendy.Tasks.Utils.Tests
 {
     [TestClass()]
-    public class XMLTests
+    public class XMLUtilTests
     {
         [TestMethod()]
         public void DeserializeWendyXMLTest()

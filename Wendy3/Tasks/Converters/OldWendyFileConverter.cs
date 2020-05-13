@@ -59,11 +59,12 @@ namespace Wendy.Tasks.Converters
         {
             Contract.Requires(invoice != null);
 
-            Model.InvoiceShared invoiceShared = invoice.Balanced ? 
-                new Model.InvoiceSharedBalanced(invoice.Id, invoice.StartDate, invoice.EndDate) :
+            Model.InvoiceShared invoiceShared = 
                 new Model.InvoiceShared(invoice.Id, invoice.StartDate, invoice.EndDate);
 
-            invoiceShared.SetReadOut(invoice.Estimation, invoice.Consumption);
+            invoiceShared.Balanced = invoice.Balanced;
+            invoiceShared.SetReadOut(invoice.Consumption, invoice.Consumption);
+            invoiceShared.SetConsumption(invoice.Estimation, 0);
             invoiceShared.SetBasicFee(invoice.BasicFee, 0);
             invoiceShared.SetUsageFee(invoice.WaterFee, invoice.WasteFee);
 

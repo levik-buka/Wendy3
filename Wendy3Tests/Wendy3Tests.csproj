@@ -50,12 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tasks\Converters\OldWendyFileConverterTests.cs" />
-    <Compile Include="Tasks\Utils\XMLTests.cs" />
+    <Compile Include="Tasks\Utils\JsonUtilTests.cs" />
+    <Compile Include="Tasks\Utils\XMLUtilTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Resource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <EmbeddedResource Include="Wendy.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Wendy3\Wendy3.csproj">

@@ -1,0 +1,1130 @@
+﻿{
+    "Invoices": [
+        {
+            "Balanced": true,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2007-12-19T00:00:00+02:00",
+                    "ReadOut": {
+                        "Estimated": 76,
+                        "Real": 76
+                    },
+                    "Consumption": {
+                        "Estimated": 0,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 11.24,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 79.04,
+                    "WasteWaterFee": 101.84
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2007-12-19T00:00:00+02:00",
+                        "ReadOut": {
+                            "Estimated": 28,
+                            "Real": 28
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 5.62,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 29.12,
+                        "WasteWaterFee": 37.52
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2007-12-19T00:00:00+02:00",
+                        "ReadOut": {
+                            "Estimated": 48,
+                            "Real": 48
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 5.62,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 49.92,
+                        "WasteWaterFee": 64.32
+                    }
+                }
+            ],
+            "Id": 0,
+            "Start": "2007-08-18T00:00:00+03:00",
+            "End": "2007-12-19T00:00:00+02:00"
+        },
+        {
+            "Balanced": false,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2007-12-31T00:00:00+02:00",
+                    "ReadOut": {
+                        "Estimated": 91,
+                        "Real": 91
+                    },
+                    "Consumption": {
+                        "Estimated": 18,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 1.09,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 18.72,
+                    "WasteWaterFee": 24.12
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2007-12-31T00:00:00+02:00",
+                        "ReadOut": {
+                            "Estimated": 34,
+                            "Real": 34
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 0.55,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 8.32,
+                        "WasteWaterFee": 10.72
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2007-12-31T00:00:00+02:00",
+                        "ReadOut": {
+                            "Estimated": 57,
+                            "Real": 57
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 0.54,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 10.4,
+                        "WasteWaterFee": 13.4
+                    }
+                }
+            ],
+            "Id": 1,
+            "Start": "2007-12-20T00:00:00+02:00",
+            "End": "2007-12-31T00:00:00+02:00"
+        },
+        {
+            "Balanced": false,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2008-03-31T12:46:39+03:00",
+                    "ReadOut": {
+                        "Estimated": 140,
+                        "Real": 140
+                    },
+                    "Consumption": {
+                        "Estimated": 74,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 8.67,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 78.44,
+                    "WasteWaterFee": 100.64
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2008-03-31T12:46:39+03:00",
+                        "ReadOut": {
+                            "Estimated": 55,
+                            "Real": 55
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.33,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 33.92,
+                        "WasteWaterFee": 43.52
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2008-03-31T12:46:39+03:00",
+                        "ReadOut": {
+                            "Estimated": 85,
+                            "Real": 85
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.34,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 44.52,
+                        "WasteWaterFee": 57.12
+                    }
+                }
+            ],
+            "Id": 6,
+            "Start": "2008-01-01T12:46:39+02:00",
+            "End": "2008-03-31T12:46:39+03:00"
+        },
+        {
+            "Balanced": true,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2008-04-30T18:39:13+03:00",
+                    "ReadOut": {
+                        "Estimated": 151,
+                        "Real": 151
+                    },
+                    "Consumption": {
+                        "Estimated": 0,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 12.61,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 79.36,
+                    "WasteWaterFee": 101.86
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2008-04-30T18:39:13+03:00",
+                        "ReadOut": {
+                            "Estimated": 60,
+                            "Real": 60
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 6.3,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 33.87,
+                        "WasteWaterFee": 43.47
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2008-04-30T18:39:13+03:00",
+                        "ReadOut": {
+                            "Estimated": 91,
+                            "Real": 91
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 6.31,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 45.49,
+                        "WasteWaterFee": 58.39
+                    }
+                }
+            ],
+            "Id": 8,
+            "Start": "2007-12-20T18:39:13+02:00",
+            "End": "2008-04-30T18:39:13+03:00"
+        },
+        {
+            "Balanced": false,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2008-06-30T18:41:03+03:00",
+                    "ReadOut": {
+                        "Estimated": 199,
+                        "Real": 199
+                    },
+                    "Consumption": {
+                        "Estimated": 36,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 5.81,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 38.16,
+                    "WasteWaterFee": 48.96
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2008-06-30T18:41:03+03:00",
+                        "ReadOut": {
+                            "Estimated": 75,
+                            "Real": 75
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 2.91,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 11.66,
+                        "WasteWaterFee": 14.96
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2008-06-30T18:41:03+03:00",
+                        "ReadOut": {
+                            "Estimated": 124,
+                            "Real": 124
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 2.9,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 26.5,
+                        "WasteWaterFee": 34.0
+                    }
+                }
+            ],
+            "Id": 9,
+            "Start": "2008-05-01T18:41:03+03:00",
+            "End": "2008-06-30T18:41:03+03:00"
+        },
+        {
+            "Balanced": false,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2008-09-30T18:26:24+03:00",
+                    "ReadOut": {
+                        "Estimated": 240,
+                        "Real": 240
+                    },
+                    "Consumption": {
+                        "Estimated": 54,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 8.76,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 57.24,
+                    "WasteWaterFee": 73.44
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2008-09-30T18:26:24+03:00",
+                        "ReadOut": {
+                            "Estimated": 92,
+                            "Real": 92
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.38,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 23.32,
+                        "WasteWaterFee": 29.92
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2008-09-30T18:26:24+03:00",
+                        "ReadOut": {
+                            "Estimated": 148,
+                            "Real": 148
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.38,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 33.92,
+                        "WasteWaterFee": 43.52
+                    }
+                }
+            ],
+            "Id": 10,
+            "Start": "2008-07-01T18:26:24+03:00",
+            "End": "2008-09-30T18:26:24+03:00"
+        },
+        {
+            "Balanced": false,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2008-12-31T15:38:58+02:00",
+                    "ReadOut": {
+                        "Estimated": 290,
+                        "Real": 290
+                    },
+                    "Consumption": {
+                        "Estimated": 54,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 8.76,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 57.24,
+                    "WasteWaterFee": 73.44
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2008-12-31T15:38:58+02:00",
+                        "ReadOut": {
+                            "Estimated": 117,
+                            "Real": 117
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.38,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 28.62,
+                        "WasteWaterFee": 36.72
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2008-12-31T15:38:58+02:00",
+                        "ReadOut": {
+                            "Estimated": 173,
+                            "Real": 173
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.38,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 28.62,
+                        "WasteWaterFee": 36.72
+                    }
+                }
+            ],
+            "Id": 11,
+            "Start": "2008-10-01T15:38:58+03:00",
+            "End": "2008-12-31T15:38:58+02:00"
+        },
+        {
+            "Balanced": false,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2009-03-31T14:50:17+03:00",
+                    "ReadOut": {
+                        "Estimated": 337,
+                        "Real": 337
+                    },
+                    "Consumption": {
+                        "Estimated": 53,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 8.74,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 57.24,
+                    "WasteWaterFee": 73.14
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2009-03-31T14:50:17+03:00",
+                        "ReadOut": {
+                            "Estimated": 140,
+                            "Real": 140
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.37,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 28.08,
+                        "WasteWaterFee": 35.88
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2009-03-31T14:50:17+03:00",
+                        "ReadOut": {
+                            "Estimated": 197,
+                            "Real": 197
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.37,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 29.16,
+                        "WasteWaterFee": 37.26
+                    }
+                }
+            ],
+            "Id": 12,
+            "Start": "2009-01-01T14:50:17+02:00",
+            "End": "2009-03-31T14:50:17+03:00"
+        },
+        {
+            "Balanced": true,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2009-04-30T22:44:49+03:00",
+                    "ReadOut": {
+                        "Estimated": 364,
+                        "Real": 364
+                    },
+                    "Consumption": {
+                        "Estimated": 0,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 34.99,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 227.18,
+                    "WasteWaterFee": 291.08
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2009-04-30T22:44:49+03:00",
+                        "ReadOut": {
+                            "Estimated": 152,
+                            "Real": 152
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 17.5,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 98.18,
+                        "WasteWaterFee": 125.78
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2009-04-30T22:44:49+03:00",
+                        "ReadOut": {
+                            "Estimated": 212,
+                            "Real": 212
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 17.5,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 129.0,
+                        "WasteWaterFee": 165.29
+                    }
+                }
+            ],
+            "Id": 13,
+            "Start": "2008-05-01T22:44:49+03:00",
+            "End": "2009-04-30T22:44:49+03:00"
+        },
+        {
+            "Balanced": false,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2009-06-30T22:52:51+03:00",
+                    "ReadOut": {
+                        "Estimated": 399,
+                        "Real": 399
+                    },
+                    "Consumption": {
+                        "Estimated": 36,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 5.93,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 38.88,
+                    "WasteWaterFee": 49.68
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2009-06-30T22:52:51+03:00",
+                        "ReadOut": {
+                            "Estimated": 167,
+                            "Real": 167
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 2.96,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 16.2,
+                        "WasteWaterFee": 20.7
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2009-06-30T22:52:51+03:00",
+                        "ReadOut": {
+                            "Estimated": 232,
+                            "Real": 232
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 2.97,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 22.68,
+                        "WasteWaterFee": 28.98
+                    }
+                }
+            ],
+            "Id": 14,
+            "Start": "2009-05-01T22:52:51+03:00",
+            "End": "2009-06-30T22:52:51+03:00"
+        },
+        {
+            "Balanced": false,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2009-09-30T17:54:44+03:00",
+                    "ReadOut": {
+                        "Estimated": 443,
+                        "Real": 443
+                    },
+                    "Consumption": {
+                        "Estimated": 54,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 8.94,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 58.32,
+                    "WasteWaterFee": 74.52
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2009-09-30T17:54:44+03:00",
+                        "ReadOut": {
+                            "Estimated": 187,
+                            "Real": 187
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.47,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 27.0,
+                        "WasteWaterFee": 34.5
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2009-09-30T17:54:44+03:00",
+                        "ReadOut": {
+                            "Estimated": 256,
+                            "Real": 256
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.47,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 31.32,
+                        "WasteWaterFee": 40.02
+                    }
+                }
+            ],
+            "Id": 15,
+            "Start": "2009-07-01T17:54:44+03:00",
+            "End": "2009-09-30T17:54:44+03:00"
+        },
+        {
+            "Balanced": false,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2009-12-31T17:35:43+02:00",
+                    "ReadOut": {
+                        "Estimated": 495,
+                        "Real": 495
+                    },
+                    "Consumption": {
+                        "Estimated": 54,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 8.94,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 58.32,
+                    "WasteWaterFee": 74.52
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2009-12-31T17:35:43+02:00",
+                        "ReadOut": {
+                            "Estimated": 208,
+                            "Real": 208
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.47,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 23.76,
+                        "WasteWaterFee": 30.36
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2009-12-31T17:35:43+02:00",
+                        "ReadOut": {
+                            "Estimated": 287,
+                            "Real": 287
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.47,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 34.56,
+                        "WasteWaterFee": 44.16
+                    }
+                }
+            ],
+            "Id": 16,
+            "Start": "2009-10-01T17:35:43+03:00",
+            "End": "2009-12-31T17:35:43+02:00"
+        },
+        {
+            "Balanced": true,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2009-12-31T18:42:56+02:00",
+                    "ReadOut": {
+                        "Estimated": 509,
+                        "Real": 509
+                    },
+                    "Consumption": {
+                        "Estimated": 0,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 23.8,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 156.6,
+                    "WasteWaterFee": 200.1
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2009-12-31T18:42:56+02:00",
+                        "ReadOut": {
+                            "Estimated": 218,
+                            "Real": 218
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 11.9,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 71.28,
+                        "WasteWaterFee": 91.08
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2009-12-31T18:42:56+02:00",
+                        "ReadOut": {
+                            "Estimated": 291,
+                            "Real": 291
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 11.9,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 85.32,
+                        "WasteWaterFee": 109.02
+                    }
+                }
+            ],
+            "Id": 17,
+            "Start": "2009-05-01T18:42:56+03:00",
+            "End": "2009-12-31T18:42:56+02:00"
+        },
+        {
+            "Balanced": false,
+            "CommonInvoice": {
+                "ReadOut": {
+                    "ReadOutDate": "2010-03-31T19:14:58+03:00",
+                    "ReadOut": {
+                        "Estimated": 584,
+                        "Real": 584
+                    },
+                    "Consumption": {
+                        "Estimated": 53,
+                        "Real": 0
+                    }
+                },
+                "BasicFee": {
+                    "CleanWaterFee": 8.46,
+                    "WasteWaterFee": 0.0
+                },
+                "UsageFee": {
+                    "CleanWaterFee": 56.18,
+                    "WasteWaterFee": 71.02
+                }
+            },
+            "UserInvoices": [
+                {
+                    "InvoiceOwner": "Apartment B",
+                    "ReadOut": {
+                        "ReadOutDate": "2010-03-31T19:14:58+03:00",
+                        "ReadOut": {
+                            "Estimated": 249,
+                            "Real": 249
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.23,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 23.32,
+                        "WasteWaterFee": 29.48
+                    }
+                },
+                {
+                    "InvoiceOwner": "Apartment A",
+                    "ReadOut": {
+                        "ReadOutDate": "2010-03-31T19:14:58+03:00",
+                        "ReadOut": {
+                            "Estimated": 335,
+                            "Real": 335
+                        },
+                        "Consumption": {
+                            "Estimated": 0,
+                            "Real": 0
+                        }
+                    },
+                    "BasicFee": {
+                        "CleanWaterFee": 4.23,
+                        "WasteWaterFee": 0.0
+                    },
+                    "UsageFee": {
+                        "CleanWaterFee": 32.86,
+                        "WasteWaterFee": 41.54
+                    }
+                }
+            ],
+            "Id": 18,
+            "Start": "2010-01-01T19:14:58+02:00",
+            "End": "2010-03-31T19:14:58+03:00"
+        }
+    ],
+    "FeeConfigHistory": [
+        {
+            "MonthlyBasicFee": {
+                "Coefficient": 0.0,
+                "BasicFee": {
+                    "CleanWaterFee": 0.0,
+                    "WasteWaterFee": 0.0
+                }
+            },
+            "MonthlyUsageFee": {
+                "CleanWaterFee": 1.04,
+                "WasteWaterFee": 1.34
+            },
+            "VAT": 22.0,
+            "VATIncludedIntoMonthlyFees": false,
+            "Id": 0,
+            "Start": "0001-01-01T00:00:00",
+            "End": "2007-12-31T00:00:00+02:00"
+        },
+        {
+            "MonthlyBasicFee": {
+                "Coefficient": 0.0,
+                "BasicFee": {
+                    "CleanWaterFee": 0.0,
+                    "WasteWaterFee": 0.0
+                }
+            },
+            "MonthlyUsageFee": {
+                "CleanWaterFee": 1.06,
+                "WasteWaterFee": 1.36
+            },
+            "VAT": 22.0,
+            "VATIncludedIntoMonthlyFees": false,
+            "Id": 0,
+            "Start": "2008-01-01T00:00:00+02:00",
+            "End": "2008-12-31T00:00:00+02:00"
+        },
+        {
+            "MonthlyBasicFee": {
+                "Coefficient": 0.0,
+                "BasicFee": {
+                    "CleanWaterFee": 0.0,
+                    "WasteWaterFee": 0.0
+                }
+            },
+            "MonthlyUsageFee": {
+                "CleanWaterFee": 1.08,
+                "WasteWaterFee": 1.38
+            },
+            "VAT": 22.0,
+            "VATIncludedIntoMonthlyFees": false,
+            "Id": 0,
+            "Start": "2009-01-01T00:00:00+02:00",
+            "End": "2009-12-31T00:00:00+02:00"
+        },
+        {
+            "MonthlyBasicFee": {
+                "Coefficient": 0.0,
+                "BasicFee": {
+                    "CleanWaterFee": 0.0,
+                    "WasteWaterFee": 0.0
+                }
+            },
+            "MonthlyUsageFee": {
+                "CleanWaterFee": 1.06,
+                "WasteWaterFee": 1.34
+            },
+            "VAT": 22.0,
+            "VATIncludedIntoMonthlyFees": false,
+            "Id": 0,
+            "Start": "2010-01-01T00:00:00+02:00"
+        }
+    ],
+    "MainMeterConfigHistory": {
+        "MeterConfigs": [
+            {
+                "StartReadOut": 0,
+                "Id": 0,
+                "Start": "0001-01-01T00:00:00"
+            }
+        ]
+    },
+    "UserMeterConfigHistory": [
+        {
+            "MeterUser": "Apartment B",
+            "MeterConfigs": [
+                {
+                    "StartReadOut": 0,
+                    "Id": 0,
+                    "Start": "0001-01-01T00:00:00"
+                }
+            ]
+        },
+        {
+            "MeterUser": "Apartment A",
+            "MeterConfigs": [
+                {
+                    "StartReadOut": 0,
+                    "Id": 0,
+                    "Start": "0001-01-01T00:00:00"
+                }
+            ]
+        }
+    ]
+}

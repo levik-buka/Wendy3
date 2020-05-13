@@ -9,6 +9,9 @@ namespace Wendy.Model
 {
     public class InvoiceShared : DateRange
     {
+        public bool Balanced { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("CommonInvoice")]
         private Invoice CommonInvoice { get; set; }
         public List<UserInvoice> UserInvoices { get; } = new List<UserInvoice>();
 
@@ -24,8 +27,6 @@ namespace Wendy.Model
             };
         }
 
-        virtual public bool IsBalanced() { return false; }
-
         public DateTime GetReadOutDate()
         {
             return CommonInvoice.ReadOut.ReadOutDate;
@@ -38,6 +39,16 @@ namespace Wendy.Model
         public ConsumptionValue GetReadOut()
         {
             return CommonInvoice.ReadOut.GetReadOut();
+        }
+
+        public void SetConsumption(ulong estimatedConsumption, ulong realConsumption)
+        {
+            CommonInvoice.ReadOut.Consumption.Estimated = estimatedConsumption;
+            CommonInvoice.ReadOut.Consumption.Real = realConsumption;
+        }
+        public ConsumptionValue GetConsumption()
+        {
+            return CommonInvoice.ReadOut.Consumption;
         }
 
         public void SetBasicFee(decimal cleanWaterFee, decimal wasteWaterFee)

@@ -1,25 +1,34 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Wendy.Tasks.Converters;
+using Wendy.Tasks.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wendy3Tests.Utils;
-using Wendy.Tasks.Utils;
+using Wendy.Tasks.Converters;
 
-namespace Wendy.Tasks.Converters.Tests
+namespace Wendy.Tasks.Utils.Tests
 {
     [TestClass()]
-    public class OldWendyFileConverterTests
+    public class JsonUtilTests
     {
         [TestMethod()]
-        public void ToInvoiceHistoryTest()
+        public void SerializeToJsonTest()
         {
             string wendyXml = Resource.GetResourceAsString("Wendy.xml");
             var wendyData = XmlUtil.DeserializeXML<Model.Wendy1.OldWendyFile>(wendyXml, nameSpace: null);
-
             var invoiceHistory = OldWendyFileConverter.ToInvoiceHistory(wendyData);
+
+            string invoiceHistoryJson = JsonUtil.SerializeToJson(invoiceHistory);
+            Assert.AreEqual(28436, invoiceHistoryJson.Length);
+        }
+
+        [TestMethod()]
+        public void DeserializeWendyJsonTest()
+        {
+            string wendyJson = Resource.GetResourceAsString("Wendy.json");
+            var invoiceHistory = JsonUtil.DeserializeJson<Model.InvoiceHistory>(wendyJson);
 
             Assert.AreEqual(1, invoiceHistory.MainMeterConfigHistory.MeterConfigs.Count);
             Assert.AreEqual(0, invoiceHistory.MainMeterConfigHistory.MeterConfigs[0].Id);

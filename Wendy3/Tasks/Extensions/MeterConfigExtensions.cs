@@ -23,5 +23,11 @@ namespace Wendy.Tasks.Extensions
 
             return meterConfigs.Where(config => config.In(period));
         }
+
+        public static IEnumerable<MeterConfig> GetMeterConfigHistoryByOwner(this IEnumerable<UserMeterConfigHistory> userMeterConfigs, string owner)
+        {
+            return userMeterConfigs.FirstOrDefault(meter => meter.MeterUser == owner).MeterConfigs;
+        }
+
     }
 }

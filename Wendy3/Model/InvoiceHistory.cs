@@ -15,9 +15,12 @@ namespace Wendy.Model
         public MeterConfigHistory MainMeterConfigHistory { get; set; } = new MeterConfigHistory();
         public List<UserMeterConfigHistory> UserMeterConfigHistory { get; } = new List<UserMeterConfigHistory>();
 
-        public void CalculateConsumption()
+        public void CalculateAllConsumption()
         {
-
+            foreach(var invoice in Invoices)
+            {
+                CalculateConsumption(invoice);
+            }
         }
 
         public ulong CalculateConsumption(int invoiceId)
@@ -28,12 +31,28 @@ namespace Wendy.Model
                 throw new KeyNotFoundException($"Invoice with id {invoiceId} not found");
             }
 
+            return CalculateConsumption(invoice);
+        }
+
+        public ulong CalculateConsumption(InvoiceShared invoice)
+        {
+            Contract.Requires(invoice != null);
+
             InvoiceShared prevInvoice = Invoices.GetInvoiceByEndDate(invoice.Start.AddDays(-1));
 
             DateRange readOutPeriod = GetReadOutPeriod(prevInvoice, invoice);
+
+            foreach (var userInvoice in invoice.UserInvoices)
+            {
+                UserInvoice prevUserInvoice = prevInvoice?.UserInvoices.GetInvoiceByOwner(userInvoice.InvoiceOwner);
+                IEnumerable<MeterConfig> userMeterConfigs = UserMeterConfigHistory.
+                    GetMeterConfigHistoryByOwner(userInvoice.InvoiceOwner).
+                    GetMeterConfigHistoryForPeriod(readOutPeriod);
+
+                CalculateUserConsumption(readOutPeriod, prevUserInvoice, userInvoice, userMeterConfigs);
+            }
+
             IEnumerable<MeterConfig> meterConfigs = MainMeterConfigHistory.MeterConfigs.GetMeterConfigHistoryForPeriod(readOutPeriod);
-
-
             return CalculateCommonConsumption(prevInvoice, invoice, meterConfigs);
         }
 
@@ -46,6 +65,29 @@ namespace Wendy.Model
 
             ulong startReadOut = prevInvoice?.GetReadOut().Real ?? 0U;
             ulong endReadOut = invoice.GetReadOut().Real;
+            
+            ulong commonConsumption = CalculateConsumption(readOutPeriod, startReadOut, endReadOut, meterConfigs);
+
+            invoice.SetConsumption(invoice.GetConsumption().Estimated, commonConsumption);
+            return commonConsumption;
+        }
+
+        private static ulong CalculateUserConsumption(DateRange readOutPeriod, UserInvoice prevInvoice, UserInvoice invoice, IEnumerable<MeterConfig> meterConfigs)
+        {
+            Contract.Requires(invoice != null);
+            Contract.Requires(meterConfigs != null);
+
+            ulong startReadOut = prevInvoice?.ReadOut.GetReadOut().Real ?? 0U;
+            ulong endReadOut = invoice.ReadOut.GetReadOut().Real;
+
+            invoice.ReadOut.Consumption.Real = CalculateConsumption(readOutPeriod, startReadOut, endReadOut, meterConfigs);
+            return invoice.ReadOut.Consumption.Real;
+        }
+
+        private static ulong CalculateConsumption(DateRange readOutPeriod, ulong startReadOut, ulong endReadOut, IEnumerable<MeterConfig> meterConfigs)
+        {
+            Contract.Requires(meterConfigs != null);
+
             ulong realConsumption = 0U;
 
             MeterConfig firstConfig = meterConfigs.FirstOrDefault();
@@ -80,17 +122,7 @@ namespace Wendy.Model
                 }
             }
 
-            invoice.SetConsumption(invoice.GetConsumption().Estimated, realConsumption);
-
             return realConsumption;
-        }
-
-        private static ulong CalculateUserConsumption(UserInvoice prevInvoice, UserInvoice invoice, ulong meterReadOut)
-        {
-            Contract.Requires(prevInvoice != null);
-            Contract.Requires(invoice != null);
-
-            return 0U;
         }
 
         private static DateRange GetReadOutPeriod(InvoiceShared prevInvoice, InvoiceShared invoice)

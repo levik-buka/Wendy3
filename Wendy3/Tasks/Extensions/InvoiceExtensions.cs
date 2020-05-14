@@ -10,12 +10,17 @@ namespace Wendy.Tasks.Extensions
     {
         public static Model.InvoiceShared GetInvoiceById(this IEnumerable<Model.InvoiceShared> invoices, long id)
         {
-            return invoices.Where(invoice => invoice.Id == id).FirstOrDefault();
+            return invoices.FirstOrDefault(invoice => invoice.Id == id);
+        }
+
+        public static Model.UserInvoice GetInvoiceByOwner(this IEnumerable<Model.UserInvoice> invoices, string owner)
+        {
+            return invoices.FirstOrDefault(invoice => invoice.InvoiceOwner == owner);
         }
 
         public static Model.InvoiceShared GetInvoiceByEndDate(this IEnumerable<Model.InvoiceShared> invoices, DateTime endDate)
         {
-            return invoices.Where(invoice => invoice.End == endDate).FirstOrDefault();
+            return invoices.FirstOrDefault(invoice => invoice.End == endDate);
         }
     }
 }

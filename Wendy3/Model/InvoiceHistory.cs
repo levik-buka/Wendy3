@@ -42,6 +42,11 @@ namespace Wendy.Model
 
             DateRange readOutPeriod = GetReadOutPeriod(prevInvoice, invoice);
 
+            IEnumerable<MeterConfig> meterConfigs = MainMeterConfigHistory.MeterConfigs.GetMeterConfigHistoryForPeriod(readOutPeriod);
+            ulong realCommonConsumption = CalculateRealCommonConsumption(prevInvoice, invoice, meterConfigs);
+            ulong estimatedCommonConsumption = CalculateEstimatedCommonConsumption(prevInvoice, invoice, meterConfigs);
+            ulong totalEstimatedUserConsumption = 0U;
+
             foreach (var userInvoice in invoice.UserInvoices)
             {
                 UserInvoice prevUserInvoice = prevInvoice?.UserInvoices.GetInvoiceByOwner(userInvoice.InvoiceOwner);
@@ -49,39 +54,95 @@ namespace Wendy.Model
                     GetMeterConfigHistoryByOwner(userInvoice.InvoiceOwner).
                     GetMeterConfigHistoryForPeriod(readOutPeriod);
 
-                CalculateUserConsumption(readOutPeriod, prevUserInvoice, userInvoice, userMeterConfigs);
+                ulong realUserConsumption = CalculateRealUserConsumption(readOutPeriod, prevUserInvoice, userInvoice, userMeterConfigs);
+                totalEstimatedUserConsumption += 
+                    CalculateEstimatedUserConsumption(userInvoice, realUserConsumption, new ConsumptionValue(estimatedCommonConsumption, realCommonConsumption));
             }
 
-            IEnumerable<MeterConfig> meterConfigs = MainMeterConfigHistory.MeterConfigs.GetMeterConfigHistoryForPeriod(readOutPeriod);
-            return CalculateCommonConsumption(prevInvoice, invoice, meterConfigs);
+            FineGrainEstimatedUserConsumption(
+                invoice.UserInvoices,
+                Convert.ToInt64(totalEstimatedUserConsumption - estimatedCommonConsumption),
+                new ConsumptionValue(estimatedCommonConsumption, realCommonConsumption)
+            );
+
+            return realCommonConsumption;
         }
 
-        private static ulong CalculateCommonConsumption(InvoiceShared prevInvoice, InvoiceShared invoice, IEnumerable<MeterConfig> meterConfigs)
+        private static ulong CalculateRealCommonConsumption(InvoiceShared prevInvoice, InvoiceShared invoice, IEnumerable<MeterConfig> meterConfigs)
         {
             Contract.Requires(invoice != null);
             Contract.Requires(meterConfigs != null);
 
             DateRange readOutPeriod = GetReadOutPeriod(prevInvoice, invoice);
 
-            ulong startReadOut = prevInvoice?.GetReadOut().Real ?? 0U;
-            ulong endReadOut = invoice.GetReadOut().Real;
-            
-            ulong commonConsumption = CalculateConsumption(readOutPeriod, startReadOut, endReadOut, meterConfigs);
+            ulong startRealReadOut = prevInvoice?.GetReadOut().Real ?? 0U;
+            ulong endRealReadOut = invoice.GetReadOut().Real;
 
-            invoice.SetConsumption(invoice.GetConsumption().Estimated, commonConsumption);
-            return commonConsumption;
+            ulong commonRealConsumption = CalculateConsumption(readOutPeriod, startRealReadOut, endRealReadOut, meterConfigs);
+
+            invoice.SetConsumption(invoice.GetConsumption().Estimated, commonRealConsumption);
+            return commonRealConsumption;
         }
 
-        private static ulong CalculateUserConsumption(DateRange readOutPeriod, UserInvoice prevInvoice, UserInvoice invoice, IEnumerable<MeterConfig> meterConfigs)
+        private static ulong CalculateEstimatedCommonConsumption(InvoiceShared prevInvoice, InvoiceShared invoice, IEnumerable<MeterConfig> meterConfigs)
         {
             Contract.Requires(invoice != null);
             Contract.Requires(meterConfigs != null);
 
-            ulong startReadOut = prevInvoice?.ReadOut.GetReadOut().Real ?? 0U;
-            ulong endReadOut = invoice.ReadOut.GetReadOut().Real;
+            DateRange readOutPeriod = GetReadOutPeriod(prevInvoice, invoice);
 
-            invoice.ReadOut.Consumption.Real = CalculateConsumption(readOutPeriod, startReadOut, endReadOut, meterConfigs);
+            ulong commonEstimatedConsumption = invoice.GetConsumption().Estimated;
+            if (commonEstimatedConsumption == 0)
+            {
+                ulong startEstimatedReadOut = prevInvoice?.GetReadOut().Estimated ?? 0U;
+                ulong endEstimatedReadOut = invoice.GetReadOut().Estimated;
+
+                commonEstimatedConsumption = CalculateConsumption(readOutPeriod, startEstimatedReadOut, endEstimatedReadOut, meterConfigs);
+
+                invoice.SetConsumption(commonEstimatedConsumption, invoice.GetConsumption().Real);
+            }
+
+            return commonEstimatedConsumption;
+        }
+
+        private static ulong CalculateRealUserConsumption(DateRange readOutPeriod, UserInvoice prevInvoice, UserInvoice invoice, IEnumerable<MeterConfig> meterConfigs)
+        {
+            Contract.Requires(invoice != null);
+            Contract.Requires(meterConfigs != null);
+
+            ulong startRealReadOut = prevInvoice?.ReadOut.GetReadOut().Real ?? 0U;
+            ulong endRealReadOut = invoice.ReadOut.GetReadOut().Real;
+            invoice.ReadOut.Consumption.Real = CalculateConsumption(readOutPeriod, startRealReadOut, endRealReadOut, meterConfigs);
+
             return invoice.ReadOut.Consumption.Real;
+        }
+
+        private static ulong CalculateEstimatedUserConsumption(UserInvoice invoice, ulong realUserConsumption, ConsumptionValue commonConsumption)
+        {
+            Contract.Requires(commonConsumption != null);
+
+            decimal estimatedUserConsumption = Convert.ToDecimal(commonConsumption.Estimated * realUserConsumption) / Convert.ToDecimal(commonConsumption.Real);
+            invoice.ReadOut.Consumption.Estimated = Convert.ToUInt64(Math.Round(estimatedUserConsumption));
+
+            return invoice.ReadOut.Consumption.Estimated;
+        }
+
+        private static void FineGrainEstimatedUserConsumption(IEnumerable<UserInvoice> userInvoices, long estimatedConsumptionDiff, ConsumptionValue commonConsumption)
+        {
+            foreach(var userInvoice in userInvoices)
+            {
+                if (estimatedConsumptionDiff > 0)
+                {
+                    userInvoice.ReadOut.Consumption.Estimated--;
+                    estimatedConsumptionDiff--;
+                }
+                else if (estimatedConsumptionDiff < 0)
+                {
+                    userInvoice.ReadOut.Consumption.Estimated++;
+                    estimatedConsumptionDiff++;
+                }
+                else return;
+            }
         }
 
         private static ulong CalculateConsumption(DateRange readOutPeriod, ulong startReadOut, ulong endReadOut, IEnumerable<MeterConfig> meterConfigs)

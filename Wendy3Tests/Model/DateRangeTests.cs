@@ -1,0 +1,78 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Wendy.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Wendy.Model.Tests
+{
+    [TestClass()]
+    public class DateRangeTests
+    {
+        [TestMethod()]
+        public void InTest()
+        {
+            DateRange dr = new DateRange { Start = new DateTime(2020, 01, 01), End = new DateTime(2020, 01, 31) };
+
+            Assert.IsTrue(dr.In(new DateRange { Start = new DateTime(2020, 01, 01), End = new DateTime(2020, 01, 31) }));
+            Assert.IsTrue(dr.In(new DateRange { Start = new DateTime(2020, 01, 01), End = new DateTime(2020, 02, 01) }));
+            Assert.IsTrue(dr.In(new DateRange { Start = new DateTime(2019, 12, 31), End = new DateTime(2020, 02, 01) }));
+            Assert.IsTrue(dr.In(new DateRange { Start = new DateTime(2020, 01, 01), End = null }));
+            Assert.IsTrue(dr.In(new DateRange { Start = new DateTime(2019, 12, 31), End = null }));
+
+            Assert.IsFalse(dr.In(new DateRange { Start = new DateTime(2020, 01, 02), End = new DateTime(2020, 01, 31) }));
+            Assert.IsFalse(dr.In(new DateRange { Start = new DateTime(2020, 01, 01), End = new DateTime(2020, 01, 30) }));
+            Assert.IsFalse(dr.In(new DateRange { Start = new DateTime(2020, 01, 02), End = new DateTime(2020, 01, 30) }));
+            Assert.IsFalse(dr.In(new DateRange { Start = new DateTime(2020, 01, 02), End = null }));
+        }
+
+        [TestMethod()]
+        public void EndlessInTest()
+        {
+            DateRange dr = new DateRange { Start = new DateTime(2020, 01, 01), End = null };
+
+            Assert.IsTrue(dr.In(new DateRange { Start = new DateTime(2020, 01, 01), End = null }));
+            Assert.IsTrue(dr.In(new DateRange { Start = new DateTime(2019, 12, 31), End = null }));
+
+            Assert.IsFalse(dr.In(new DateRange { Start = new DateTime(2020, 01, 01), End = new DateTime(2020, 01, 31) }));
+            Assert.IsFalse(dr.In(new DateRange { Start = new DateTime(2020, 01, 02), End = null }));
+        }
+
+        [TestMethod()]
+        public void IntersectsTest()
+        {
+            DateRange dr = new DateRange { Start = new DateTime(2020, 01, 01), End = new DateTime(2020, 01, 31) };
+
+            Assert.IsTrue(dr.Intersects(new DateRange { Start = new DateTime(2020, 01, 01), End = new DateTime(2020, 01, 31) }));
+            Assert.IsTrue(dr.Intersects(new DateRange { Start = new DateTime(2020, 01, 01), End = new DateTime(2020, 02, 01) }));
+            Assert.IsTrue(dr.Intersects(new DateRange { Start = new DateTime(2019, 12, 31), End = new DateTime(2020, 02, 01) }));
+            Assert.IsTrue(dr.Intersects(new DateRange { Start = new DateTime(2020, 01, 01), End = null }));
+            Assert.IsTrue(dr.Intersects(new DateRange { Start = new DateTime(2019, 12, 31), End = null }));
+
+            Assert.IsTrue(dr.Intersects(new DateRange { Start = new DateTime(2020, 01, 02), End = new DateTime(2020, 01, 31) }));
+            Assert.IsTrue(dr.Intersects(new DateRange { Start = new DateTime(2020, 01, 01), End = new DateTime(2020, 01, 30) }));
+            Assert.IsTrue(dr.Intersects(new DateRange { Start = new DateTime(2020, 01, 02), End = new DateTime(2020, 01, 30) }));
+            Assert.IsTrue(dr.Intersects(new DateRange { Start = new DateTime(2020, 01, 02), End = null }));
+
+            Assert.IsFalse(dr.Intersects(new DateRange { Start = new DateTime(2019, 12, 01), End = new DateTime(2019, 12, 31) }));
+            Assert.IsFalse(dr.Intersects(new DateRange { Start = new DateTime(2020, 02, 01), End = new DateTime(2020, 02, 28) }));
+            Assert.IsFalse(dr.Intersects(new DateRange { Start = new DateTime(2020, 02, 01), End = null }));
+        }
+
+        [TestMethod()]
+        public void EndlessIntersectsTest()
+        {
+            DateRange dr = new DateRange { Start = new DateTime(2020, 01, 01), End = null };
+
+            Assert.IsTrue(dr.Intersects(new DateRange { Start = new DateTime(2020, 01, 01), End = null }));
+            Assert.IsTrue(dr.Intersects(new DateRange { Start = new DateTime(2019, 12, 31), End = null }));
+
+            Assert.IsTrue(dr.Intersects(new DateRange { Start = new DateTime(2020, 01, 01), End = new DateTime(2020, 01, 31) }));
+            Assert.IsTrue(dr.Intersects(new DateRange { Start = new DateTime(2020, 01, 02), End = null }));
+
+            Assert.IsFalse(dr.Intersects(new DateRange { Start = new DateTime(2019, 12, 01), End = new DateTime(2019, 12, 31) }));
+        }
+    }
+}

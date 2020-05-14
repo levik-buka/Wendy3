@@ -11,8 +11,10 @@ namespace Wendy.Model
     public class DateRange
     {
         public long Id { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime? End { get; set; }
+        private DateTime startDate;
+        public DateTime Start { get { return startDate; } set { startDate = value.Date; } }  // pick up only date, not time
+        private DateTime? endDate;
+        public DateTime? End { get { return endDate; } set { endDate = value?.Date; } }     // pick up only date, not time
 
         public bool Covers(DateTime date)
         {
@@ -39,6 +41,26 @@ namespace Wendy.Model
             return true;
         }
 
+        public bool In(DateRange period)
+        {
+            Contract.Requires(period != null);
+
+            if (period.Covers(Start))
+            {
+                if (!period.End.HasValue)
+                {
+                    return true;
+                }
+                if (!End.HasValue)
+                {
+                    return false;
+                }
+                
+                return period.Covers(End.Value);
+            }
+
+            return false;
+        }
 
     }
 }

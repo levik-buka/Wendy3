@@ -28,17 +28,58 @@ namespace Wendy.Model
                 throw new KeyNotFoundException($"Invoice with id {invoiceId} not found");
             }
 
-            InvoiceShared prevInvoice = Invoices.GetInvoiceByEndDate(invoice.Start.AddDays(-1)) ?? InvoiceShared.CreateEmpty();
+            InvoiceShared prevInvoice = Invoices.GetInvoiceByEndDate(invoice.Start.AddDays(-1));
 
-            return CalculateCommonConsumption(prevInvoice, invoice, MainMeterConfigHistory.GetConsumptionUntilDate(invoice.Start, invoice.GetReadOutDate()));
+            DateRange readOutPeriod = GetReadOutPeriod(prevInvoice, invoice);
+            IEnumerable<MeterConfig> meterConfigs = MainMeterConfigHistory.MeterConfigs.GetMeterConfigHistoryForPeriod(readOutPeriod);
+
+
+            return CalculateCommonConsumption(prevInvoice, invoice, meterConfigs);
         }
 
-        private static ulong CalculateCommonConsumption(InvoiceShared prevInvoice, InvoiceShared invoice, ulong meterReadOut)
+        private static ulong CalculateCommonConsumption(InvoiceShared prevInvoice, InvoiceShared invoice, IEnumerable<MeterConfig> meterConfigs)
         {
-            Contract.Requires(prevInvoice != null);
             Contract.Requires(invoice != null);
+            Contract.Requires(meterConfigs != null);
 
-            ulong realConsumption = invoice.GetReadOut().Real - prevInvoice.GetReadOut().Real + meterReadOut;
+            DateRange readOutPeriod = GetReadOutPeriod(prevInvoice, invoice);
+
+            ulong startReadOut = prevInvoice?.GetReadOut().Real ?? 0U;
+            ulong endReadOut = invoice.GetReadOut().Real;
+            ulong realConsumption = 0U;
+
+            MeterConfig firstConfig = meterConfigs.FirstOrDefault();
+            if (firstConfig != null)
+            {
+                // if meter changed on start of period, use meter's start readout
+                if (firstConfig.Start == readOutPeriod.Start)
+                {
+                    startReadOut = firstConfig.StartReadOut;
+                }
+                // if meter changed in the middle of period
+                if (firstConfig.Start < readOutPeriod.Start && firstConfig.EndReadOut.HasValue)
+                {
+                    realConsumption = firstConfig.EndReadOut.Value - startReadOut;
+                }
+            }
+
+            // add consumption of the period if meters changed many times
+            realConsumption += Convert.ToUInt64(meterConfigs.GetMeterConfigHistoryInPeriod(readOutPeriod).Sum(config => config.GetConsumption()));
+
+            MeterConfig lastConfig = meterConfigs.LastOrDefault();
+            if (lastConfig != null)
+            {
+                // if meter not changed
+                if (!lastConfig.EndReadOut.HasValue)
+                {
+                    if (lastConfig != firstConfig)
+                    {
+                        startReadOut = lastConfig.StartReadOut;
+                    }
+                    realConsumption += endReadOut - startReadOut;
+                }
+            }
+
             invoice.SetConsumption(invoice.GetConsumption().Estimated, realConsumption);
 
             return realConsumption;
@@ -50,6 +91,13 @@ namespace Wendy.Model
             Contract.Requires(invoice != null);
 
             return 0U;
+        }
+
+        private static DateRange GetReadOutPeriod(InvoiceShared prevInvoice, InvoiceShared invoice)
+        {
+            Contract.Requires(invoice != null);
+
+            return new DateRange { Start = prevInvoice?.GetReadOutDate().AddDays(1) ?? invoice.Start, End = invoice.GetReadOutDate() };
         }
     }
 }

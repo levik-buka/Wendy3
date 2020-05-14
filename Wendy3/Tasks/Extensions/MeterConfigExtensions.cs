@@ -16,5 +16,12 @@ namespace Wendy.Tasks.Extensions
 
             return meterConfigs.Where(config => config.Intersects(period));
         }
+
+        public static IEnumerable<MeterConfig> GetMeterConfigHistoryInPeriod(this IEnumerable<MeterConfig> meterConfigs, DateRange period)
+        {
+            Contract.Requires(meterConfigs != null);
+
+            return meterConfigs.Where(config => config.In(period));
+        }
     }
 }

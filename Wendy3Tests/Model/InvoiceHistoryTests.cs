@@ -21,6 +21,8 @@ namespace Wendy.Model.Tests
 
             Assert.AreEqual(76U, invoiceHistory.CalculateConsumption(0));
             Assert.AreEqual(15U, invoiceHistory.CalculateConsumption(1));
+            Assert.AreEqual(49U, invoiceHistory.CalculateConsumption(6));
+            Assert.AreEqual(75U, invoiceHistory.CalculateConsumption(8), "consumption for whole year from prev balanced invoice (0)");
         }
     }
 }

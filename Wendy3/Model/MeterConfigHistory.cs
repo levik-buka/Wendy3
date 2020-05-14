@@ -19,14 +19,5 @@ namespace Wendy.Model
         {
             MeterConfigs = meterConfigs.ToList();
         }
-
-        public ulong GetConsumptionUntilDate(DateTime invoiceStartDate, DateTime readOutDate)
-        {
-            IEnumerable<MeterConfig> configs = MeterConfigs.GetMeterConfigHistoryForPeriod(new DateRange { Start = invoiceStartDate, End = readOutDate });
-            
-            long consumption = configs.Sum(meter => meter.GetConsumption());
-
-            return Convert.ToUInt64(consumption);
-        }
     }
 }

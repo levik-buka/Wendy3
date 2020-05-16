@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,16 +23,22 @@ namespace Wendy.Model
 
         public ConsumptionValue GetConsumption()
         {
+            Contract.Requires(ReadOut != null);
+
             return ReadOut.GetConsumption();
         }
 
         public DateTime GetReadOutDate()
         {
+            Contract.Requires(ReadOut != null);
+
             return ReadOut.ReadOutDate;
         }
 
         public ConsumptionValue GetReadOut()
         {
+            Contract.Requires(ReadOut != null);
+
             return ReadOut.GetReadOut();
         }
     }

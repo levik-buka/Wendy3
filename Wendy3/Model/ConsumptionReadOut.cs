@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,25 +22,17 @@ namespace Wendy.Model
             Consumption = new ConsumptionValue(0, 0);
         }
 
-        public void SetReadOut(ulong estimatedReadout, ulong realReadOut)
-        {
-            ReadOut.Estimated = estimatedReadout;
-            ReadOut.Real = realReadOut;
-        }
-
         public ConsumptionValue GetReadOut()
         {
-            return ReadOut;
-        }
+            Contract.Ensures(ReadOut != null);
 
-        public void SetConsumption(ulong estimatedConsumption, ulong realConsumption)
-        {
-            Consumption.Estimated = estimatedConsumption;
-            Consumption.Real = realConsumption;
+            return ReadOut;
         }
 
         public ConsumptionValue GetConsumption()
         {
+            Contract.Ensures(Consumption != null);
+
             return Consumption;
         }
     }

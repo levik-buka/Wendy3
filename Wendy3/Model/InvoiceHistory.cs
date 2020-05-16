@@ -14,7 +14,5 @@ namespace Wendy.Model
         public List<FeeConfig> FeeConfigHistory { get; } = new List<FeeConfig>();
         public MeterConfigHistory MainMeterConfigHistory { get; set; } = new MeterConfigHistory();
         public List<UserMeterConfigHistory> UserMeterConfigHistory { get; } = new List<UserMeterConfigHistory>();
-
-
     }
 }

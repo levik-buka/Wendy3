@@ -31,26 +31,38 @@ namespace Wendy.Model
 
         public DateTime GetReadOutDate()
         {
+            Contract.Requires(CommonInvoice != null);
+
             return CommonInvoice.GetReadOutDate();
         }
 
         public ConsumptionValue GetReadOut()
         {
+            Contract.Requires(CommonInvoice != null);
+
             return CommonInvoice.GetReadOut();
         }
 
         public ConsumptionValue GetConsumption()
         {
+            Contract.Requires(CommonInvoice != null);
+
             return CommonInvoice.GetConsumption();
         }
 
         public WaterFee GetBasicFee()
         {
+            Contract.Requires(CommonInvoice != null);
+            Contract.Ensures(CommonInvoice.BasicFee != null);
+
             return CommonInvoice.BasicFee;
         }
 
         public WaterFee GetUsageFee()
         {
+            Contract.Requires(CommonInvoice != null);
+            Contract.Ensures(CommonInvoice.UsageFee != null);
+
             return CommonInvoice.UsageFee;
         }
     }

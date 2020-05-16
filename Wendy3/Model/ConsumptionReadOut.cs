@@ -12,7 +12,7 @@ namespace Wendy.Model
         [Newtonsoft.Json.JsonProperty("ReadOut")] // needed because of private
         private ConsumptionValue ReadOut { get; set; }
         [Newtonsoft.Json.JsonProperty("Consumption")]   // needed because of private set
-        public ConsumptionValue Consumption { get; private set; }
+        private ConsumptionValue Consumption { get; set; }
 
         public ConsumptionReadOut(DateTime readOutDate, ulong estimatedReadout, ulong realReadOut)
         {
@@ -32,5 +32,15 @@ namespace Wendy.Model
             return ReadOut;
         }
 
+        public void SetConsumption(ulong estimatedConsumption, ulong realConsumption)
+        {
+            Consumption.Estimated = estimatedConsumption;
+            Consumption.Real = realConsumption;
+        }
+
+        public ConsumptionValue GetConsumption()
+        {
+            return Consumption;
+        }
     }
 }

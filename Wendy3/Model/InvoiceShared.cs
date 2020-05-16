@@ -21,10 +21,7 @@ namespace Wendy.Model
             Start = startDate;
             End = endDate;
 
-            CommonInvoice = new Invoice
-            {
-                ReadOut = new ConsumptionReadOut(endDate ?? startDate, 0, 0)
-            };
+            CommonInvoice = new Invoice(endDate ?? startDate, 0, 0);
         }
 
         public static InvoiceShared CreateEmpty()
@@ -34,41 +31,24 @@ namespace Wendy.Model
 
         public DateTime GetReadOutDate()
         {
-            return CommonInvoice.ReadOut.ReadOutDate;
+            return CommonInvoice.GetReadOutDate();
         }
 
-        public void SetReadOut(ulong estimatedReadout, ulong realReadOut)
-        {
-            CommonInvoice.ReadOut.SetReadOut(estimatedReadout, realReadOut);
-        }
         public ConsumptionValue GetReadOut()
         {
-            return CommonInvoice.ReadOut.GetReadOut();
+            return CommonInvoice.GetReadOut();
         }
 
-        public void SetConsumption(ulong estimatedConsumption, ulong realConsumption)
-        {
-            CommonInvoice.ReadOut.Consumption.Estimated = estimatedConsumption;
-            CommonInvoice.ReadOut.Consumption.Real = realConsumption;
-        }
         public ConsumptionValue GetConsumption()
         {
-            return CommonInvoice.ReadOut.Consumption;
+            return CommonInvoice.GetConsumption();
         }
 
-        public void SetBasicFee(decimal cleanWaterFee, decimal wasteWaterFee)
-        {
-            CommonInvoice.BasicFee = new WaterFee(cleanWaterFee, wasteWaterFee);
-        }
         public WaterFee GetBasicFee()
         {
             return CommonInvoice.BasicFee;
         }
 
-        public void SetUsageFee(decimal cleanWaterFee, decimal wasteWaterFee)
-        {
-            CommonInvoice.UsageFee = new WaterFee(cleanWaterFee, wasteWaterFee);
-        }
         public WaterFee GetUsageFee()
         {
             return CommonInvoice.UsageFee;

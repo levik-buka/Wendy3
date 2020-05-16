@@ -83,11 +83,11 @@ namespace Wendy.Tasks.Converters.Tests
             {
                 Model.UserInvoice userInvoice = invoiceHistory.Invoices[0].UserInvoices[1];
                 Assert.AreEqual("Apartment A", userInvoice.InvoiceOwner);
-                Assert.AreEqual(new DateTime(2007, 12, 19), userInvoice.ReadOut.ReadOutDate);
-                Assert.AreEqual(48U, userInvoice.ReadOut.GetReadOut().Estimated);
-                Assert.AreEqual(48U, userInvoice.ReadOut.GetReadOut().Real);
-                Assert.AreEqual(0U, userInvoice.ReadOut.Consumption.Estimated);
-                Assert.AreEqual(0U, userInvoice.ReadOut.Consumption.Real);
+                Assert.AreEqual(new DateTime(2007, 12, 19), userInvoice.GetReadOutDate());
+                Assert.AreEqual(48U, userInvoice.GetReadOut().Estimated);
+                Assert.AreEqual(48U, userInvoice.GetReadOut().Real);
+                Assert.AreEqual(0U, userInvoice.GetConsumption().Estimated);
+                Assert.AreEqual(0U, userInvoice.GetConsumption().Real);
                 Assert.AreEqual(5.62m, userInvoice.BasicFee.CleanWaterFee);
                 Assert.AreEqual(0m, userInvoice.BasicFee.WasteWaterFee);
                 Assert.AreEqual(49.92m, userInvoice.UsageFee.CleanWaterFee);
@@ -98,11 +98,11 @@ namespace Wendy.Tasks.Converters.Tests
             {
                 Model.UserInvoice userInvoice = invoiceHistory.Invoices[1].UserInvoices[0];
                 Assert.AreEqual("Apartment B", userInvoice.InvoiceOwner);
-                Assert.AreEqual(new DateTime(2007, 12, 31), userInvoice.ReadOut.ReadOutDate);
-                Assert.AreEqual(34U, userInvoice.ReadOut.GetReadOut().Estimated);
-                Assert.AreEqual(34U, userInvoice.ReadOut.GetReadOut().Real);
-                Assert.AreEqual(0U, userInvoice.ReadOut.Consumption.Estimated);
-                Assert.AreEqual(0U, userInvoice.ReadOut.Consumption.Real);
+                Assert.AreEqual(new DateTime(2007, 12, 31), userInvoice.GetReadOutDate());
+                Assert.AreEqual(34U, userInvoice.GetReadOut().Estimated);
+                Assert.AreEqual(34U, userInvoice.GetReadOut().Real);
+                Assert.AreEqual(0U, userInvoice.GetConsumption().Estimated);
+                Assert.AreEqual(0U, userInvoice.GetConsumption().Real);
                 Assert.AreEqual(0.55m, userInvoice.BasicFee.CleanWaterFee);
                 Assert.AreEqual(0m, userInvoice.BasicFee.WasteWaterFee);
                 Assert.AreEqual(8.32m, userInvoice.UsageFee.CleanWaterFee);

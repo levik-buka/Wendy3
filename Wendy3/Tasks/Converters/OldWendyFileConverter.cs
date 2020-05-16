@@ -44,10 +44,8 @@ namespace Wendy.Tasks.Converters
         {
             Contract.Requires(user != null);
 
-            var userInvoice = new Model.UserInvoice 
+            var userInvoice = new Model.UserInvoice(user.User, readOutDate, user.Consumption, user.Consumption)
             { 
-                InvoiceOwner = user.User,
-                ReadOut = new Model.ConsumptionReadOut(readOutDate, user.Consumption, user.Consumption),
                 BasicFee = new Model.WaterFee(user.BasicFee, 0),
                 UsageFee = new Model.WaterFee(user.WaterFee, user.WasteFee)
             };
@@ -59,14 +57,17 @@ namespace Wendy.Tasks.Converters
         {
             Contract.Requires(invoice != null);
 
-            Model.InvoiceShared invoiceShared = 
-                new Model.InvoiceShared(invoice.Id, invoice.StartDate, invoice.EndDate);
+            Model.InvoiceShared invoiceShared = new Model.InvoiceShared(invoice.Id, invoice.StartDate, invoice.EndDate)
+            {
+                Balanced = invoice.Balanced
+            };
 
-            invoiceShared.Balanced = invoice.Balanced;
-            invoiceShared.SetReadOut(invoice.Consumption, invoice.Consumption);
-            invoiceShared.SetConsumption(invoice.Estimation, 0);
-            invoiceShared.SetBasicFee(invoice.BasicFee, 0);
-            invoiceShared.SetUsageFee(invoice.WaterFee, invoice.WasteFee);
+            invoiceShared.GetReadOut().Estimated = invoice.Consumption;
+            invoiceShared.GetReadOut().Real = invoice.Consumption;
+            invoiceShared.GetConsumption().Estimated = invoice.Estimation;
+            invoiceShared.GetBasicFee().CleanWaterFee = invoice.BasicFee;
+            invoiceShared.GetUsageFee().CleanWaterFee = invoice.WaterFee;
+            invoiceShared.GetUsageFee().WasteWaterFee = invoice.WasteFee;
 
             return invoiceShared;
         }

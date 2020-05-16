@@ -9,5 +9,11 @@ namespace Wendy.Model
     public class UserInvoice : Invoice
     {
         public string InvoiceOwner { get; set; }
+
+        public UserInvoice(string user, DateTime readOutDate, ulong estimatedReadout, ulong realReadOut)
+            : base(readOutDate, estimatedReadout, realReadOut)
+        {
+            InvoiceOwner = user;
+        }
     }
 }

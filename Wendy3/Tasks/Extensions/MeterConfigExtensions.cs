@@ -26,7 +26,9 @@ namespace Wendy.Tasks.Extensions
 
         public static IEnumerable<MeterConfig> GetMeterConfigHistoryByOwner(this IEnumerable<UserMeterConfigHistory> userMeterConfigs, string owner)
         {
-            return userMeterConfigs.FirstOrDefault(meter => meter.MeterUser == owner).MeterConfigs;
+            Contract.Requires(userMeterConfigs != null);
+
+            return userMeterConfigs.First(meter => meter.MeterUser == owner).MeterConfigs;
         }
 
     }

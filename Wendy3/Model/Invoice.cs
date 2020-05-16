@@ -11,8 +11,10 @@ namespace Wendy.Model
     {
         [Newtonsoft.Json.JsonProperty("ReadOut")]   // needed because of private set
         private ConsumptionReadOut ReadOut { get; set; }
-        public WaterFee BasicFee { get; set; }
-        public WaterFee UsageFee { get; set; }
+        [Newtonsoft.Json.JsonProperty("BasicFee")]   // needed because of private set
+        private WaterFee BasicFee { get; set; }
+        [Newtonsoft.Json.JsonProperty("UsageFee")]   // needed because of private set
+        private WaterFee UsageFee { get; set; }
 
         public Invoice(DateTime readOutDate, ulong estimatedReadout, ulong realReadOut)
         {
@@ -40,6 +42,20 @@ namespace Wendy.Model
             Contract.Requires(ReadOut != null);
 
             return ReadOut.GetReadOut();
+        }
+
+        public WaterFee GetBasicFee()
+        {
+            Contract.Ensures(BasicFee != null);
+
+            return BasicFee;
+        }
+
+        public WaterFee GetUsageFee()
+        {
+            Contract.Ensures(UsageFee != null);
+
+            return UsageFee;
         }
     }
 }

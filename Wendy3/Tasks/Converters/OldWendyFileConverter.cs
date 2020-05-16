@@ -44,11 +44,10 @@ namespace Wendy.Tasks.Converters
         {
             Contract.Requires(user != null);
 
-            var userInvoice = new Model.UserInvoice(user.User, readOutDate, user.Consumption, user.Consumption)
-            { 
-                BasicFee = new Model.WaterFee(user.BasicFee, 0),
-                UsageFee = new Model.WaterFee(user.WaterFee, user.WasteFee)
-            };
+            var userInvoice = new Model.UserInvoice(user.User, readOutDate, user.Consumption, user.Consumption);
+            userInvoice.GetBasicFee().CleanWaterFee = user.BasicFee;
+            userInvoice.GetUsageFee().CleanWaterFee = user.WaterFee;
+            userInvoice.GetUsageFee().WasteWaterFee = user.WasteFee;
 
             return userInvoice;
         }

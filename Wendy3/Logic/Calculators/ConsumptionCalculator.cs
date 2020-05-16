@@ -22,6 +22,8 @@ namespace Wendy.Logic.Calculators
 
         public void CalculateConsumption()
         {
+            Contract.Requires(invoiceHistory != null);
+
             InvoiceShared prevInvoice = null;
             foreach (var invoice in invoiceHistory.Invoices)
             {
@@ -34,6 +36,8 @@ namespace Wendy.Logic.Calculators
 
         public ulong CalculateConsumption(int invoiceId)
         {
+            Contract.Requires(invoiceHistory != null);
+
             InvoiceShared invoice = invoiceHistory.Invoices.GetInvoiceById(invoiceId);
             if (invoice == null)
             {

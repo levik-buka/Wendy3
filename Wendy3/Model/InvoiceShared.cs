@@ -53,17 +53,15 @@ namespace Wendy.Model
         public WaterFee GetBasicFee()
         {
             Contract.Requires(CommonInvoice != null);
-            Contract.Ensures(CommonInvoice.BasicFee != null);
 
-            return CommonInvoice.BasicFee;
+            return CommonInvoice.GetBasicFee();
         }
 
         public WaterFee GetUsageFee()
         {
             Contract.Requires(CommonInvoice != null);
-            Contract.Ensures(CommonInvoice.UsageFee != null);
 
-            return CommonInvoice.UsageFee;
+            return CommonInvoice.GetUsageFee();
         }
     }
 }

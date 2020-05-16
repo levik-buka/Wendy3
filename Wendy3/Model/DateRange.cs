@@ -16,6 +16,16 @@ namespace Wendy.Model
         private DateTime? endDate;
         public DateTime? End { get { return endDate; } set { endDate = value?.Date; } }     // pick up only date, not time
 
+        public int GetMonths()
+        {
+            if (!End.HasValue)
+            {
+                throw new InvalidOperationException("Cannot calculate months in DateRange, because of missing end date");
+            }
+
+            return (End.Value - Start).Days / 30;
+        }
+
         public bool Covers(DateTime date)
         {
             if (Start <= date)

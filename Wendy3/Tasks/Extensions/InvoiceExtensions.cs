@@ -37,5 +37,11 @@ namespace Wendy.Tasks.Extensions
             return new Model.DateRange { Start = prevInvoice?.GetReadOutDate().AddDays(1) ?? invoice.Start, End = invoice.GetReadOutDate() };
         }
 
+        public static IEnumerable<Model.InvoiceShared> GetEstimatedInvoicesForPeriod(this IEnumerable<Model.InvoiceShared> invoices, Model.DateRange period)
+        {
+            Contract.Requires(invoices != null);
+
+            return invoices.Where(invoice => (invoice.Balanced == false && invoice.Intersects(period)));
+        }
     }
 }

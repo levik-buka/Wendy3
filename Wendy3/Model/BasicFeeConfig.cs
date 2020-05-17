@@ -25,11 +25,25 @@ namespace Wendy.Model
             return Coefficient * BasicFee.CleanWaterFee * VAT;
         }
 
+        public decimal GetCleanWaterBasicFeeWithoutVAT(decimal VAT)
+        {
+            Contract.Requires(BasicFee != null);
+
+            return Coefficient * BasicFee.CleanWaterFee / VAT;
+        }
+
         public decimal GetWasteWaterBasicFeeWithVAT(decimal VAT)
         {
             Contract.Requires(BasicFee != null);
 
             return Coefficient * BasicFee.WasteWaterFee * VAT;
+        }
+
+        public decimal GetWasteWaterBasicFeeWithoutVAT(decimal VAT)
+        {
+            Contract.Requires(BasicFee != null);
+
+            return Coefficient * BasicFee.WasteWaterFee / VAT;
         }
     }
 }

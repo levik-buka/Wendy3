@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logic\Calculators\ConsumptionCalculatorTests.cs" />
+    <Compile Include="Logic\Calculators\FeeCalculatorTests.cs" />
     <Compile Include="Model\DateRangeTests.cs" />
     <Compile Include="Tasks\Converters\OldWendyFileConverterTests.cs" />
     <Compile Include="Tasks\Utils\JsonUtilTests.cs" />

@@ -20,7 +20,7 @@ namespace Wendy.Model
         {
             if (!End.HasValue)
             {
-                throw new InvalidOperationException("Cannot calculate months in DateRange, because of missing end date");
+                throw new InvalidOperationException($"Cannot calculate months in DateRange {startDate.ToShortDateString()} - inf, because of missing end date");
             }
 
             return (End.Value - Start).Days / 30;

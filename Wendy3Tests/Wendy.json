@@ -1026,9 +1026,9 @@
     "FeeConfigHistory": [
         {
             "MonthlyBasicFee": {
-                "Coefficient": 0.0,
+                "Coefficient": 1.0,
                 "BasicFee": {
-                    "CleanWaterFee": 0.0,
+                    "CleanWaterFee": 2.81,
                     "WasteWaterFee": 0.0
                 }
             },

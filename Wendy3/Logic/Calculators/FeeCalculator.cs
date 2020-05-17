@@ -48,6 +48,11 @@ namespace Wendy.Logic.Calculators
             Contract.Requires(invoiceHistory != null);
 
             IEnumerable<FeeConfig> feeConfigs = invoiceHistory.FeeConfigHistory.GetFeeConfigHistoryForPeriod(invoice);
+            if (!feeConfigs.Any())
+            {
+                throw new InvalidDataException($"Unable to calculate fee for invoice ({invoice.Id}), because of missing fee configurations");
+            }
+
             if (invoice.Balanced == false)  // estimated invoide should have only one fee config
             {
                 if (feeConfigs.Count() > 1)
@@ -59,69 +64,133 @@ namespace Wendy.Logic.Calculators
             }
             else
             {
-                IEnumerable<InvoiceShared> estimatedInvoiced = invoiceHistory.Invoices.GetEstimatedInvoicesForPeriod(invoice);
-                CalculateRealFee(invoice, feeConfigs, estimatedInvoiced);
+                IEnumerable<InvoiceShared> estimatedInvoiced = invoiceHistory.Invoices.GetEstimatedInvoicesInPeriod(invoice);
+                CalculateRealFee(invoice, estimatedInvoiced, feeConfigs);
             }
         }
 
-        private void CalculateRealFee(InvoiceShared realInvoice, IEnumerable<FeeConfig> feeConfigs, IEnumerable<InvoiceShared> estimatedInvoices)
+        private static void CalculateRealFee(InvoiceShared realInvoice, IEnumerable<InvoiceShared> estimatedInvoices, IEnumerable<FeeConfig> feeConfigs)
         {
             Contract.Requires(realInvoice != null);
             Contract.Requires(feeConfigs != null);
+            Contract.Requires(estimatedInvoices != null);
 
-            if (!feeConfigs.Any())
+            realInvoice.GetBasicFee().ResetWaterFee();
+            realInvoice.GetUsageFee().ResetWaterFee();
+            realInvoice.UserInvoices.ForEach(invoice =>
             {
-                throw new InvalidDataException($"Unable to calculate fee for invoice ({realInvoice.Id}), because of missing fee configurations");
+                invoice.GetBasicFee().ResetWaterFee();
+                invoice.GetUsageFee().ResetWaterFee();
+            });
+
+            foreach (var estimatedInvoice in estimatedInvoices)
+            {
+                CalculateRealFee(realInvoice, estimatedInvoice, feeConfigs.GetFeeConfigOfPeriodOrThrowException(estimatedInvoice));
             }
 
+            InvoiceShared unestimatedInvoice = realInvoice.CreateUnestimated(estimatedInvoices);
+            CalculateRealFee(realInvoice, unestimatedInvoice, feeConfigs.GetFeeConfigOfPeriodOrThrowException(unestimatedInvoice));
         }
 
-        private static bool CalculateEstimatedFee(InvoiceShared invoice, FeeConfig feeConfig)
+        private static bool CalculateRealFee(InvoiceShared realInvoice, InvoiceShared estimatedInvoice, FeeConfig feeConfig)
         {
-            Contract.Requires(invoice != null);
+            Contract.Requires(realInvoice != null);
+            Contract.Requires(estimatedInvoice != null);
             Contract.Requires(feeConfig != null);
 
-            if (!CalculateCommonEstimatedBasicFee(invoice, feeConfig)) return false;
-            if (!CalculateCommonEstimatedUsageFee(invoice, feeConfig)) return false;
+            if (!CalculateCommonRealBasicFee(realInvoice, estimatedInvoice, feeConfig)) return false;
+            if (!CalculateCommonRealUsageFee(realInvoice, estimatedInvoice, feeConfig)) return false;
 
-            foreach (var userInvoice in invoice.UserInvoices)
+            foreach (var userInvoice in realInvoice.UserInvoices)
             {
-                CalculateUserEstimatedBasicFee(invoice, userInvoice, feeConfig);
+                UserInvoice estimatedUserInvoice = estimatedInvoice.UserInvoices.GetInvoiceByOwner(userInvoice.InvoiceOwner);
+
+                CalculateUserRealBasicFee(estimatedInvoice, userInvoice, realInvoice.UserInvoices.Count, feeConfig);
+                CalculateUserRealUsageFee(userInvoice, estimatedUserInvoice, feeConfig);
+            }
+
+            return true;
+        }
+
+        private static bool CalculateEstimatedFee(InvoiceShared estimatedInvoice, FeeConfig feeConfig)
+        {
+            Contract.Requires(estimatedInvoice != null);
+            Contract.Requires(feeConfig != null);
+
+            if (!CalculateCommonEstimatedBasicFee(estimatedInvoice, feeConfig)) return false;
+            if (!CalculateCommonEstimatedUsageFee(estimatedInvoice, feeConfig)) return false;
+
+            foreach (var userInvoice in estimatedInvoice.UserInvoices)
+            {
+                CalculateUserEstimatedBasicFee(estimatedInvoice, userInvoice, estimatedInvoice.UserInvoices.Count, feeConfig);
                 CalculateUserEstimatedUsageFee(userInvoice, feeConfig);
             }
 
             return true;
         }
 
-        private static void CalculateUserEstimatedUsageFee(UserInvoice userInvoice, FeeConfig feeConfig)
+        private static void CalculateUserRealUsageFee(UserInvoice userRealInvoice, UserInvoice userEstimatedInvoice, FeeConfig feeConfig)
         {
-            Contract.Requires(userInvoice != null);
+            Contract.Requires(userRealInvoice != null);
+            Contract.Requires(userEstimatedInvoice != null);
             Contract.Requires(feeConfig != null);
 
-            userInvoice.GetUsageFee().CleanWaterFee = userInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyCleanWaterUsageFeeWithVAT();
-            userInvoice.GetUsageFee().WasteWaterFee = userInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyWasteWaterUsageFeeWithVAT();
+            userRealInvoice.GetUsageFee().CleanWaterFee += userEstimatedInvoice.GetConsumption().Real * feeConfig.GetMonthlyCleanWaterUsageFeeWithoutVAT();
+            userRealInvoice.GetUsageFee().WasteWaterFee += userEstimatedInvoice.GetConsumption().Real * feeConfig.GetMonthlyWasteWaterUsageFeeWithoutVAT();
         }
 
+        private static void CalculateUserEstimatedUsageFee(UserInvoice userEstimatedInvoice, FeeConfig feeConfig)
+        {
+            Contract.Requires(userEstimatedInvoice != null);
+            Contract.Requires(feeConfig != null);
 
-        private static void CalculateUserEstimatedBasicFee(DateRange invoicePeriod, UserInvoice userInvoice, FeeConfig feeConfig)
+            userEstimatedInvoice.GetUsageFee().CleanWaterFee = userEstimatedInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyCleanWaterUsageFeeWithoutVAT();
+            userEstimatedInvoice.GetUsageFee().WasteWaterFee = userEstimatedInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyWasteWaterUsageFeeWithoutVAT();
+        }
+
+        private static void CalculateUserRealBasicFee(DateRange invoicePeriod, UserInvoice userRealInvoice, int userCount, FeeConfig feeConfig)
         {
             Contract.Requires(invoicePeriod != null);
-            Contract.Requires(userInvoice != null);
+            Contract.Requires(userRealInvoice != null);
             Contract.Requires(feeConfig != null);
+            Contract.Requires(userCount > 0);
 
-            userInvoice.GetBasicFee().CleanWaterFee = invoicePeriod.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithVAT();
-            userInvoice.GetBasicFee().WasteWaterFee = invoicePeriod.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithVAT();
+            userRealInvoice.GetBasicFee().CleanWaterFee += invoicePeriod.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT() / userCount;
+            userRealInvoice.GetBasicFee().WasteWaterFee += invoicePeriod.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT() / userCount;
         }
 
-        private static bool CalculateCommonEstimatedUsageFee(InvoiceShared invoice, FeeConfig feeConfig)
+        private static void CalculateUserEstimatedBasicFee(DateRange invoicePeriod, UserInvoice userEstimatedInvoice, int userCount, FeeConfig feeConfig)
         {
-            Contract.Requires(invoice != null);
+            Contract.Requires(invoicePeriod != null);
+            Contract.Requires(userEstimatedInvoice != null);
+            Contract.Requires(feeConfig != null);
+            Contract.Requires(userCount > 0);
+
+            userEstimatedInvoice.GetBasicFee().CleanWaterFee = invoicePeriod.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT() / userCount;
+            userEstimatedInvoice.GetBasicFee().WasteWaterFee = invoicePeriod.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT() / userCount;
+        }
+
+        private static bool CalculateCommonRealUsageFee(InvoiceShared realInvoice, InvoiceShared estimatedInvoice, FeeConfig feeConfig)
+        {
+            Contract.Requires(realInvoice != null);
+            Contract.Requires(estimatedInvoice != null);
             Contract.Requires(feeConfig != null);
 
-            if (invoice.Balanced == false)
+            realInvoice.GetUsageFee().CleanWaterFee += estimatedInvoice.GetConsumption().Real * feeConfig.GetMonthlyCleanWaterUsageFeeWithoutVAT();
+            realInvoice.GetUsageFee().WasteWaterFee += estimatedInvoice.GetConsumption().Real * feeConfig.GetMonthlyWasteWaterUsageFeeWithoutVAT();
+
+            return true;
+        }
+
+        private static bool CalculateCommonEstimatedUsageFee(InvoiceShared estimatedInvoice, FeeConfig feeConfig)
+        {
+            Contract.Requires(estimatedInvoice != null);
+            Contract.Requires(feeConfig != null);
+
+            if (estimatedInvoice.Balanced == false)
             {
-                invoice.GetUsageFee().CleanWaterFee = invoice.GetConsumption().Estimated * feeConfig.GetMonthlyCleanWaterUsageFeeWithVAT();
-                invoice.GetUsageFee().WasteWaterFee = invoice.GetConsumption().Estimated * feeConfig.GetMonthlyWasteWaterUsageFeeWithVAT();
+                estimatedInvoice.GetUsageFee().CleanWaterFee = estimatedInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyCleanWaterUsageFeeWithoutVAT();
+                estimatedInvoice.GetUsageFee().WasteWaterFee = estimatedInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyWasteWaterUsageFeeWithoutVAT();
 
                 return true;
             }
@@ -129,15 +198,27 @@ namespace Wendy.Logic.Calculators
             return false;
         }
 
-        private static bool CalculateCommonEstimatedBasicFee(InvoiceShared invoice, FeeConfig feeConfig)
+        private static bool CalculateCommonRealBasicFee(InvoiceShared realInvoice, InvoiceShared estimatedInvoice, FeeConfig feeConfig)
         {
-            Contract.Requires(invoice != null);
+            Contract.Requires(realInvoice != null);
+            Contract.Requires(estimatedInvoice != null);
             Contract.Requires(feeConfig != null);
 
-            if (invoice.Balanced == false)
+            realInvoice.GetBasicFee().CleanWaterFee += realInvoice.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT();
+            realInvoice.GetBasicFee().WasteWaterFee += realInvoice.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT();
+
+            return true;
+        }
+
+        private static bool CalculateCommonEstimatedBasicFee(InvoiceShared estimatedInvoice, FeeConfig feeConfig)
+        {
+            Contract.Requires(estimatedInvoice != null);
+            Contract.Requires(feeConfig != null);
+
+            if (estimatedInvoice.Balanced == false)
             {
-                invoice.GetBasicFee().CleanWaterFee = invoice.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithVAT();
-                invoice.GetBasicFee().WasteWaterFee = invoice.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithVAT();
+                estimatedInvoice.GetBasicFee().CleanWaterFee = estimatedInvoice.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT();
+                estimatedInvoice.GetBasicFee().WasteWaterFee = estimatedInvoice.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT();
 
                 return true;
             }

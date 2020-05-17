@@ -97,10 +97,10 @@ namespace Wendy.Tasks.Utils.Tests
                 Assert.AreEqual(48U, userInvoice.GetReadOut().Real);
                 Assert.AreEqual(0U, userInvoice.GetConsumption().Estimated);
                 Assert.AreEqual(0U, userInvoice.GetConsumption().Real);
-                Assert.AreEqual(5.62m, userInvoice.BasicFee.CleanWaterFee);
-                Assert.AreEqual(0m, userInvoice.BasicFee.WasteWaterFee);
-                Assert.AreEqual(49.92m, userInvoice.UsageFee.CleanWaterFee);
-                Assert.AreEqual(64.32m, userInvoice.UsageFee.WasteWaterFee);
+                Assert.AreEqual(5.62m, userInvoice.GetBasicFee().CleanWaterFee);
+                Assert.AreEqual(0m, userInvoice.GetBasicFee().WasteWaterFee);
+                Assert.AreEqual(49.92m, userInvoice.GetUsageFee().CleanWaterFee);
+                Assert.AreEqual(64.32m, userInvoice.GetUsageFee().WasteWaterFee);
             }
 
             Assert.AreEqual(2, invoiceHistory.Invoices[1].UserInvoices.Count);
@@ -112,10 +112,10 @@ namespace Wendy.Tasks.Utils.Tests
                 Assert.AreEqual(34U, userInvoice.GetReadOut().Real);
                 Assert.AreEqual(0U, userInvoice.GetConsumption().Estimated);
                 Assert.AreEqual(0U, userInvoice.GetConsumption().Real);
-                Assert.AreEqual(0.55m, userInvoice.BasicFee.CleanWaterFee);
-                Assert.AreEqual(0m, userInvoice.BasicFee.WasteWaterFee);
-                Assert.AreEqual(8.32m, userInvoice.UsageFee.CleanWaterFee);
-                Assert.AreEqual(10.72m, userInvoice.UsageFee.WasteWaterFee);
+                Assert.AreEqual(0.55m, userInvoice.GetBasicFee().CleanWaterFee);
+                Assert.AreEqual(0m, userInvoice.GetBasicFee().WasteWaterFee);
+                Assert.AreEqual(8.32m, userInvoice.GetUsageFee().CleanWaterFee);
+                Assert.AreEqual(10.72m, userInvoice.GetUsageFee().WasteWaterFee);
             }
         }
     }

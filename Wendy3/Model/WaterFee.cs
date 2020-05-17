@@ -16,5 +16,11 @@ namespace Wendy.Model
             CleanWaterFee = cleanWaterFee;
             WasteWaterFee = wasteWaterFee;
         }
+
+        public void ResetWaterFee()
+        {
+            CleanWaterFee = 0m;
+            WasteWaterFee = 0m;
+        }
     }
 }

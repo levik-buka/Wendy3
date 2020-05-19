@@ -50,9 +50,37 @@ namespace Wendy.Logic.Calculators.Tests
             var consumptionCalc = new ConsumptionCalculator(invoiceHistory);
             var feeCalc = new FeeCalculator(invoiceHistory);
 
-            consumptionCalc.CalculateConsumption(0);
-            feeCalc.CalculateFee(0);
-            AssertInvoicesFee(invoiceHistoryForAsserts.Invoices.GetInvoiceById(0), invoiceHistory.Invoices.GetInvoiceById(0));
+            consumptionCalc.CalculateConsumption();
+
+            {
+                int invoiceId = 0;  // balanced
+                feeCalc.CalculateFee(invoiceId);
+                AssertInvoicesFee(invoiceHistoryForAsserts.Invoices.GetInvoiceById(invoiceId), invoiceHistory.Invoices.GetInvoiceById(invoiceId));
+            }
+
+            {
+                int invoiceId = 14; // estimated
+                feeCalc.CalculateFee(invoiceId);
+                AssertInvoicesFee(invoiceHistoryForAsserts.Invoices.GetInvoiceById(invoiceId), invoiceHistory.Invoices.GetInvoiceById(invoiceId));
+            }
+
+            {
+                int invoiceId = 15; // estimated
+                feeCalc.CalculateFee(invoiceId);
+                AssertInvoicesFee(invoiceHistoryForAsserts.Invoices.GetInvoiceById(invoiceId), invoiceHistory.Invoices.GetInvoiceById(invoiceId));
+            }
+
+            {
+                int invoiceId = 16; // estimated
+                feeCalc.CalculateFee(invoiceId);
+                AssertInvoicesFee(invoiceHistoryForAsserts.Invoices.GetInvoiceById(invoiceId), invoiceHistory.Invoices.GetInvoiceById(invoiceId));
+            }
+
+            {
+                int invoiceId = 17; // balanced
+                feeCalc.CalculateFee(invoiceId);
+                AssertInvoicesFee(invoiceHistoryForAsserts.Invoices.GetInvoiceById(invoiceId), invoiceHistory.Invoices.GetInvoiceById(invoiceId));
+            }
         }
     }
 }

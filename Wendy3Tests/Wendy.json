@@ -717,7 +717,7 @@
                         }
                     },
                     "BasicFee": {
-                        "CleanWaterFee": 2.97,
+                        "CleanWaterFee": 2.96,
                         "WasteWaterFee": 0.0
                     },
                     "UsageFee": {
@@ -1028,7 +1028,7 @@
             "MonthlyBasicFee": {
                 "Coefficient": 1.0,
                 "BasicFee": {
-                    "CleanWaterFee": 2.81,
+                    "CleanWaterFee": 2.758,
                     "WasteWaterFee": 0.0
                 }
             },
@@ -1044,9 +1044,9 @@
         },
         {
             "MonthlyBasicFee": {
-                "Coefficient": 0.0,
+                "Coefficient": 3.0,
                 "BasicFee": {
-                    "CleanWaterFee": 0.0,
+                    "CleanWaterFee": 2.81,
                     "WasteWaterFee": 0.0
                 }
             },
@@ -1062,9 +1062,9 @@
         },
         {
             "MonthlyBasicFee": {
-                "Coefficient": 0.0,
+                "Coefficient": 1.0,
                 "BasicFee": {
-                    "CleanWaterFee": 0.0,
+                    "CleanWaterFee": 2.955,
                     "WasteWaterFee": 0.0
                 }
             },

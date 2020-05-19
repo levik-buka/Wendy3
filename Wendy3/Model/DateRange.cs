@@ -16,14 +16,14 @@ namespace Wendy.Model
         private DateTime? endDate;
         public DateTime? End { get { return endDate; } set { endDate = value?.Date; } }     // pick up only date, not time
 
-        public int GetMonths()
+        public decimal GetMonths()
         {
             if (!End.HasValue)
             {
                 throw new InvalidOperationException($"Cannot calculate months in DateRange {startDate.ToShortDateString()} - inf, because of missing end date");
             }
 
-            return (End.Value - Start).Days / 30;
+            return ((End.Value - Start).Days + 1) * 12 / 365m;    // end date included
         }
 
         public bool Covers(DateTime date)

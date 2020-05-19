@@ -74,5 +74,21 @@ namespace Wendy.Model.Tests
 
             Assert.IsFalse(dr.Intersects(new DateRange { Start = new DateTime(2019, 12, 01), End = new DateTime(2019, 12, 31) }));
         }
+
+        [TestMethod()]
+        public void GetMonthsTest()
+        {
+            {
+                DateRange dr = new DateRange { Start = new DateTime(2007, 08, 18), End = new DateTime(2007, 12, 19) };
+                Assert.AreEqual(4.077m, Math.Round(dr.GetMonths(), 3));
+                Assert.AreEqual(123, (dr.End.Value - dr.Start).Days);
+            }
+
+            {
+                DateRange dr = new DateRange { Start = new DateTime(2007, 12, 20), End = new DateTime(2007, 12, 31) };
+                Assert.AreEqual(0.395m, Math.Round(dr.GetMonths(), 3));
+                Assert.AreEqual(11, (dr.End.Value - dr.Start).Days);
+            }
+        }
     }
 }

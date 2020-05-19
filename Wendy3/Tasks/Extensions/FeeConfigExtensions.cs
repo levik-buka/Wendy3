@@ -42,5 +42,10 @@ namespace Wendy.Tasks.Extensions
 
             return feeConfigs.Where(config => config.In(period));
         }
+
+        public static decimal RoundToCents(this decimal fee)
+        {
+            return Math.Round(fee, 2);
+        }
     }
 }

@@ -135,8 +135,8 @@ namespace Wendy.Logic.Calculators
             Contract.Requires(userEstimatedInvoice != null);
             Contract.Requires(feeConfig != null);
 
-            userRealInvoice.GetUsageFee().CleanWaterFee += userEstimatedInvoice.GetConsumption().Real * feeConfig.GetMonthlyCleanWaterUsageFeeWithoutVAT();
-            userRealInvoice.GetUsageFee().WasteWaterFee += userEstimatedInvoice.GetConsumption().Real * feeConfig.GetMonthlyWasteWaterUsageFeeWithoutVAT();
+            userRealInvoice.GetUsageFee().CleanWaterFee += (userEstimatedInvoice.GetConsumption().Real * feeConfig.GetMonthlyCleanWaterUsageFeeWithoutVAT()).RoundToCents();
+            userRealInvoice.GetUsageFee().WasteWaterFee += (userEstimatedInvoice.GetConsumption().Real * feeConfig.GetMonthlyWasteWaterUsageFeeWithoutVAT()).RoundToCents();
         }
 
         private static void CalculateUserEstimatedUsageFee(UserInvoice userEstimatedInvoice, FeeConfig feeConfig)
@@ -144,8 +144,8 @@ namespace Wendy.Logic.Calculators
             Contract.Requires(userEstimatedInvoice != null);
             Contract.Requires(feeConfig != null);
 
-            userEstimatedInvoice.GetUsageFee().CleanWaterFee = userEstimatedInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyCleanWaterUsageFeeWithoutVAT();
-            userEstimatedInvoice.GetUsageFee().WasteWaterFee = userEstimatedInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyWasteWaterUsageFeeWithoutVAT();
+            userEstimatedInvoice.GetUsageFee().CleanWaterFee = (userEstimatedInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyCleanWaterUsageFeeWithoutVAT()).RoundToCents();
+            userEstimatedInvoice.GetUsageFee().WasteWaterFee = (userEstimatedInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyWasteWaterUsageFeeWithoutVAT()).RoundToCents();
         }
 
         private static void CalculateUserRealBasicFee(DateRange invoicePeriod, UserInvoice userRealInvoice, int userCount, FeeConfig feeConfig)
@@ -155,8 +155,8 @@ namespace Wendy.Logic.Calculators
             Contract.Requires(feeConfig != null);
             Contract.Requires(userCount > 0);
 
-            userRealInvoice.GetBasicFee().CleanWaterFee += invoicePeriod.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT() / userCount;
-            userRealInvoice.GetBasicFee().WasteWaterFee += invoicePeriod.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT() / userCount;
+            userRealInvoice.GetBasicFee().CleanWaterFee += (invoicePeriod.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT() / userCount).RoundToCents();
+            userRealInvoice.GetBasicFee().WasteWaterFee += (invoicePeriod.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT() / userCount).RoundToCents();
         }
 
         private static void CalculateUserEstimatedBasicFee(DateRange invoicePeriod, UserInvoice userEstimatedInvoice, int userCount, FeeConfig feeConfig)
@@ -166,8 +166,8 @@ namespace Wendy.Logic.Calculators
             Contract.Requires(feeConfig != null);
             Contract.Requires(userCount > 0);
 
-            userEstimatedInvoice.GetBasicFee().CleanWaterFee = invoicePeriod.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT() / userCount;
-            userEstimatedInvoice.GetBasicFee().WasteWaterFee = invoicePeriod.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT() / userCount;
+            userEstimatedInvoice.GetBasicFee().CleanWaterFee = (invoicePeriod.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT() / userCount).RoundToCents();
+            userEstimatedInvoice.GetBasicFee().WasteWaterFee = (invoicePeriod.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT() / userCount).RoundToCents();
         }
 
         private static bool CalculateCommonRealUsageFee(InvoiceShared realInvoice, InvoiceShared estimatedInvoice, FeeConfig feeConfig)
@@ -176,8 +176,8 @@ namespace Wendy.Logic.Calculators
             Contract.Requires(estimatedInvoice != null);
             Contract.Requires(feeConfig != null);
 
-            realInvoice.GetUsageFee().CleanWaterFee += estimatedInvoice.GetConsumption().Real * feeConfig.GetMonthlyCleanWaterUsageFeeWithoutVAT();
-            realInvoice.GetUsageFee().WasteWaterFee += estimatedInvoice.GetConsumption().Real * feeConfig.GetMonthlyWasteWaterUsageFeeWithoutVAT();
+            realInvoice.GetUsageFee().CleanWaterFee += (estimatedInvoice.GetConsumption().Real * feeConfig.GetMonthlyCleanWaterUsageFeeWithoutVAT()).RoundToCents();
+            realInvoice.GetUsageFee().WasteWaterFee += (estimatedInvoice.GetConsumption().Real * feeConfig.GetMonthlyWasteWaterUsageFeeWithoutVAT()).RoundToCents();
 
             return true;
         }
@@ -189,8 +189,8 @@ namespace Wendy.Logic.Calculators
 
             if (estimatedInvoice.Balanced == false)
             {
-                estimatedInvoice.GetUsageFee().CleanWaterFee = estimatedInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyCleanWaterUsageFeeWithoutVAT();
-                estimatedInvoice.GetUsageFee().WasteWaterFee = estimatedInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyWasteWaterUsageFeeWithoutVAT();
+                estimatedInvoice.GetUsageFee().CleanWaterFee = (estimatedInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyCleanWaterUsageFeeWithoutVAT()).RoundToCents();
+                estimatedInvoice.GetUsageFee().WasteWaterFee = (estimatedInvoice.GetConsumption().Estimated * feeConfig.GetMonthlyWasteWaterUsageFeeWithoutVAT()).RoundToCents();
 
                 return true;
             }
@@ -204,8 +204,8 @@ namespace Wendy.Logic.Calculators
             Contract.Requires(estimatedInvoice != null);
             Contract.Requires(feeConfig != null);
 
-            realInvoice.GetBasicFee().CleanWaterFee += realInvoice.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT();
-            realInvoice.GetBasicFee().WasteWaterFee += realInvoice.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT();
+            realInvoice.GetBasicFee().CleanWaterFee += (realInvoice.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT()).RoundToCents();
+            realInvoice.GetBasicFee().WasteWaterFee += (realInvoice.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT()).RoundToCents();
 
             return true;
         }
@@ -217,8 +217,8 @@ namespace Wendy.Logic.Calculators
 
             if (estimatedInvoice.Balanced == false)
             {
-                estimatedInvoice.GetBasicFee().CleanWaterFee = estimatedInvoice.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT();
-                estimatedInvoice.GetBasicFee().WasteWaterFee = estimatedInvoice.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT();
+                estimatedInvoice.GetBasicFee().CleanWaterFee = (estimatedInvoice.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT()).RoundToCents();
+                estimatedInvoice.GetBasicFee().WasteWaterFee = (estimatedInvoice.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT()).RoundToCents();
 
                 return true;
             }

@@ -68,6 +68,7 @@ namespace Wendy.Tasks.Extensions
             {
                 Balanced = realInvoice.Balanced
             };
+
             unestimatedInvoice.GetReadOut().Estimated = realInvoice.GetReadOut().Estimated;
             unestimatedInvoice.GetReadOut().Real = realInvoice.GetReadOut().Real;
             unestimatedInvoice.GetConsumption().Estimated = realInvoice.GetConsumption().Estimated - estimatedInvoices.Sum(invoice => invoice.GetConsumption().Estimated);

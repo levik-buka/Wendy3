@@ -204,8 +204,8 @@ namespace Wendy.Logic.Calculators
             Contract.Requires(estimatedInvoice != null);
             Contract.Requires(feeConfig != null);
 
-            realInvoice.GetBasicFee().CleanWaterFee += (realInvoice.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT()).RoundToCents();
-            realInvoice.GetBasicFee().WasteWaterFee += (realInvoice.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT()).RoundToCents();
+            realInvoice.GetBasicFee().CleanWaterFee += (estimatedInvoice.GetMonths() * feeConfig.GetMonthlyCleanWaterBasicFeeWithoutVAT()).RoundToCents();
+            realInvoice.GetBasicFee().WasteWaterFee += (estimatedInvoice.GetMonths() * feeConfig.GetMonthlyWasteWaterBasicFeeWithoutVAT()).RoundToCents();
 
             return true;
         }

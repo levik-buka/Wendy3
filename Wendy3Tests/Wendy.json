@@ -891,7 +891,7 @@
                     }
                 },
                 "BasicFee": {
-                    "CleanWaterFee": 23.8,
+                    "CleanWaterFee": 23.81,
                     "WasteWaterFee": 0.0
                 },
                 "UsageFee": {

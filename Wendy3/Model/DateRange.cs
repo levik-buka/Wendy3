@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,12 +17,24 @@ namespace Wendy.Model
         private DateTime? endDate;
         public DateTime? End { get { return endDate; } set { endDate = value?.Date; } }     // pick up only date, not time
 
+        public string PeriodToString()
+        {
+            var formatProvider = new DateTimeFormatInfo()
+            {
+                DateSeparator = "."
+            };
+
+            return String.Format(formatProvider, $"{Start.ToString("d", formatProvider)} - {End?.ToString("d", formatProvider)}");
+        }
+
         public decimal GetMonths()
         {
             if (!End.HasValue)
             {
                 throw new InvalidOperationException($"Cannot calculate months in DateRange {startDate.ToShortDateString()} - inf, because of missing end date");
             }
+
+            if (End.Value == Start) return 0;
 
             return ((End.Value - Start).Days + 1) * 12 / 365m;    // end date included
         }

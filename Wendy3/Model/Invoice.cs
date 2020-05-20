@@ -57,5 +57,11 @@ namespace Wendy.Model
 
             return UsageFee;
         }
+
+        public TotalFee GetTotalFee(decimal VAT)
+        {
+            return new TotalFee(GetBasicFee().GetTotalFee(VAT).VATLessFee + GetUsageFee().GetTotalFee(VAT).VATLessFee, VAT);
+        }
+
     }
 }

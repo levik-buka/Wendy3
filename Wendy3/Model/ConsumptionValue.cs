@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
@@ -16,6 +17,11 @@ namespace Wendy.Model
         {
             Estimated = estimatedConsumption;
             Real = realConsumption;
+        }
+
+        public override string ToString()
+        {
+            return String.Format(new NumberFormatInfo(), $"{Estimated} / {Real}");
         }
     }
 }

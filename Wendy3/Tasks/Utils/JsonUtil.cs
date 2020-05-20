@@ -23,5 +23,17 @@ namespace Wendy.Tasks.Utils
             return JsonConvert.DeserializeObject<T>(jsonDoc);
 
         }
+
+        public static T DeserializeJson<T>(System.IO.TextReader jsonReader)
+        {
+            Contract.Requires(jsonReader != null);
+
+            // deserialize JSON directly from a file
+            using (JsonReader file = new JsonTextReader(jsonReader))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                return serializer.Deserialize<T>(file);
+            }
+        }
     }
 }

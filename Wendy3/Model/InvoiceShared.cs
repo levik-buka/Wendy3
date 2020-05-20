@@ -63,5 +63,10 @@ namespace Wendy.Model
 
             return CommonInvoice.GetUsageFee();
         }
+
+        public TotalFee GetTotalFee(decimal VAT)
+        {
+            return CommonInvoice.GetTotalFee(VAT);
+        }
     }
 }

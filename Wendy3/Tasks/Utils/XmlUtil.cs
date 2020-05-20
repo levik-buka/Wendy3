@@ -23,5 +23,17 @@ namespace Wendy.Tasks.Utils
                 return requestObj;
             }
         }
+
+        public static T DeserializeXML<T>(TextReader xmlReader, string nameSpace)
+        {
+            Contract.Requires(xmlReader != null);
+
+            using (var reader = XmlReader.Create(xmlReader, new XmlReaderSettings()))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(T), nameSpace);
+                T requestObj = (T)serializer.Deserialize(reader);
+                return requestObj;
+            }
+        }
     }
 }

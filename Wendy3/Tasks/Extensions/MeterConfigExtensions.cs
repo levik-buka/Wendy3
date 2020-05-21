@@ -30,6 +30,5 @@ namespace Wendy.Tasks.Extensions
 
             return userMeterConfigs.First(meter => meter.MeterUser == owner).MeterConfigs;
         }
-
     }
 }

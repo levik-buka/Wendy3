@@ -19,19 +19,16 @@ namespace Wendy.Model
 
         public string PeriodToString()
         {
-            var formatProvider = new DateTimeFormatInfo()
-            {
-                DateSeparator = "."
-            };
+            var formatProvider = new DateTimeFormatInfo();
 
-            return String.Format(formatProvider, $"{Start.ToString("d", formatProvider)} - {End?.ToString("d", formatProvider)}");
+            return String.Format(formatProvider, $"{Start.ToString("dd.MM.yyyy", formatProvider)} - {End?.ToString("dd.MM.yyyy", formatProvider)}");
         }
 
         public decimal GetMonths()
         {
             if (!End.HasValue)
             {
-                throw new InvalidOperationException($"Cannot calculate months in DateRange {startDate.ToShortDateString()} - inf, because of missing end date");
+                throw new InvalidOperationException($"Cannot calculate months in DateRange {startDate:d} - inf, because of missing end date");
             }
 
             if (End.Value == Start) return 0;

@@ -106,12 +106,38 @@ namespace Wendy
             row.Cells[0].Value = userInvoice.InvoiceOwner;
             row.Cells[1].Style.BackColor = Color.LightGray;
             row.Cells[2].Value = userInvoice.InvoiceOwner;
+
             row.Cells[3].Value = userInvoice.GetReadOut().ToString();
+            row.Cells[3].Style.BackColor = invoice.IsSumOfUserInvoicesDifferent(
+                    inv => (inv.GetReadOut().Real + inv.GetReadOut().Estimated), 
+                    userInv => (userInv.GetReadOut().Real + userInv.GetReadOut().Estimated)) ? 
+                Color.LightPink : row.Cells[3].Style.BackColor;
+            
             row.Cells[4].Value = userInvoice.GetConsumption().ToString();
+            row.Cells[4].Style.BackColor = invoice.IsSumOfUserInvoicesDifferent(
+                    inv => Convert.ToInt64(inv.GetConsumption().Real + inv.GetConsumption().Estimated),
+                    userInv => Convert.ToInt64(userInv.GetConsumption().Real + userInv.GetConsumption().Estimated)) ?
+                Color.LightPink : row.Cells[4].Style.BackColor;
+            
             row.Cells[5].Value = userInvoice.GetBasicFee().ToString();
+            row.Cells[5].Style.BackColor = invoice.IsSumOfUserInvoicesDifferent(
+                    inv => (inv.GetBasicFee().GetTotalFee(0m).VATLessFee),
+                    userInv => (userInv.GetBasicFee().GetTotalFee(0m).VATLessFee)) ?
+                Color.LightPink : row.Cells[5].Style.BackColor;
+            
             row.Cells[6].Value = userInvoice.GetUsageFee().ToString();
+            row.Cells[6].Style.BackColor = invoice.IsSumOfUserInvoicesDifferent(
+                    inv => (inv.GetUsageFee().GetTotalFee(0m).VATLessFee),
+                    userInv => (userInv.GetUsageFee().GetTotalFee(0m).VATLessFee)) ?
+                Color.LightPink : row.Cells[6].Style.BackColor;
+            
             row.Cells[7].Value = invoice.Balanced;
+            
             row.Cells[8].Value = userInvoice.GetTotalFee(feeConfig.VAT).ToString();
+            row.Cells[8].Style.BackColor = invoice.IsSumOfUserInvoicesDifferent(
+                    inv => (inv.GetTotalFee(feeConfig.VAT).VATLessFee + inv.GetTotalFee(feeConfig.VAT).WithVAT),
+                    userInv => (userInv.GetTotalFee(feeConfig.VAT).VATLessFee + userInv.GetTotalFee(feeConfig.VAT).WithVAT)) ?
+                Color.LightPink : row.Cells[8].Style.BackColor;
 
             dataGridView.Rows.Add(row);
         }

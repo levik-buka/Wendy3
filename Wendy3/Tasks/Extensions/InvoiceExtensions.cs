@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wendy.Model;
 
 namespace Wendy.Tasks.Extensions
 {
@@ -95,14 +96,45 @@ namespace Wendy.Tasks.Extensions
             Contract.Requires(invoices != null);
             Contract.Requires(selector != null);
 
+            ulong sum = invoices.Select(invoice => selector(invoice)).Sum();
+            return sum;
+        }
+
+        public static ulong Sum(this IEnumerable<ulong> source)
+        {
+            Contract.Requires(source != null);
+
             ulong sum = 0;
-            invoices.Select(invoice =>
+            foreach(ulong value in source)
             {
-                sum += selector(invoice);
-                return false;
-            });
+                sum += value;
+            }
 
             return sum;
+        }
+
+        public static bool IsSumOfUserInvoicesDifferent(this InvoiceShared invoice, Func<InvoiceShared, ulong> commonSum, Func<UserInvoice, ulong> usersSum)
+        {
+            Contract.Requires(invoice != null);
+            Contract.Requires(commonSum != null);
+            Contract.Requires(usersSum != null);
+
+            ulong invoiceSum = commonSum(invoice);
+            ulong userSum = invoice.UserInvoices.Sum(userInvoice => usersSum(userInvoice));
+
+            return invoiceSum != userSum;
+        }
+
+        public static bool IsSumOfUserInvoicesDifferent(this InvoiceShared invoice, Func<InvoiceShared, decimal> commonSum, Func<UserInvoice, decimal> usersSum)
+        {
+            Contract.Requires(invoice != null);
+            Contract.Requires(commonSum != null);
+            Contract.Requires(usersSum != null);
+
+            decimal invoiceSum = commonSum(invoice);
+            decimal userSum = invoice.UserInvoices.Sum(userInvoice => usersSum(userInvoice));
+
+            return invoiceSum != userSum;
         }
     }
 }

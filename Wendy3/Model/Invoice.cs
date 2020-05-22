@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,8 @@ namespace Wendy.Model
         private WaterFee BasicFee { get; set; }
         [Newtonsoft.Json.JsonProperty("UsageFee")]   // needed because of private set
         private WaterFee UsageFee { get; set; }
+
+        private FeeConfig feeConfig;
 
         public Invoice(DateTime readOutDate, ulong estimatedReadout, ulong realReadOut)
         {
@@ -58,9 +61,24 @@ namespace Wendy.Model
             return UsageFee;
         }
 
-        public TotalFee GetTotalFee(decimal VAT)
+        public FeeConfig GetFeeConfig()
         {
-            return new TotalFee(GetBasicFee().GetTotalFee(VAT).VATLessFee + GetUsageFee().GetTotalFee(VAT).VATLessFee, VAT);
+            return feeConfig;
+        }
+
+        public void SetFeeConfig(FeeConfig feeConfig)
+        {
+            this.feeConfig = feeConfig;
+        }
+
+        public TotalFee GetTotalFee()
+        {
+            if (feeConfig == null)
+            {
+                throw new InvalidOperationException("Invoice without knowledge about fee configuration");
+            }
+
+            return new TotalFee(GetBasicFee().GetTotalFee(feeConfig.VAT).VATLessFee + GetUsageFee().GetTotalFee(feeConfig.VAT).VATLessFee, feeConfig.VAT);
         }
 
     }

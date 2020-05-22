@@ -72,18 +72,18 @@ namespace Wendy.Tasks.Extensions
 
             unestimatedInvoice.GetReadOut().Estimated = realInvoice.GetReadOut().Estimated;
             unestimatedInvoice.GetReadOut().Real = realInvoice.GetReadOut().Real;
-            unestimatedInvoice.GetConsumption().Estimated = realInvoice.GetConsumption().Estimated - estimatedInvoices.Sum(invoice => invoice.GetConsumption().Estimated);
-            unestimatedInvoice.GetConsumption().Real = realInvoice.GetConsumption().Real - estimatedInvoices.Sum(invoice => invoice.GetConsumption().Real);
+            unestimatedInvoice.GetConsumption().Estimated = realInvoice.GetConsumption().Estimated; // - estimatedInvoices.Sum(invoice => invoice.GetConsumption().Estimated);
+            unestimatedInvoice.GetConsumption().Real = realInvoice.GetConsumption().Real; // - estimatedInvoices.Sum(invoice => invoice.GetConsumption().Real);
 
             foreach(var userInvoice in realInvoice.UserInvoices)
             {
-                var estimatedUserInvoices = estimatedInvoices.GetUserInvoicesByOwner(userInvoice.InvoiceOwner);
+                //var estimatedUserInvoices = estimatedInvoices.GetUserInvoicesByOwner(userInvoice.InvoiceOwner);
 
                 var unestimatedUserInvoice = new Model.UserInvoice(userInvoice.InvoiceOwner, userInvoice.GetReadOutDate(),
                     userInvoice.GetReadOut().Estimated, userInvoice.GetReadOut().Real);
 
-                unestimatedUserInvoice.GetConsumption().Estimated = userInvoice.GetConsumption().Estimated - estimatedUserInvoices.Sum(invoice => invoice.GetConsumption().Estimated);
-                unestimatedUserInvoice.GetConsumption().Real = userInvoice.GetConsumption().Real - estimatedUserInvoices.Sum(invoice => invoice.GetConsumption().Real);
+                unestimatedUserInvoice.GetConsumption().Estimated = userInvoice.GetConsumption().Estimated; // - estimatedUserInvoices.Sum(invoice => invoice.GetConsumption().Estimated);
+                unestimatedUserInvoice.GetConsumption().Real = userInvoice.GetConsumption().Real; // - estimatedUserInvoices.Sum(invoice => invoice.GetConsumption().Real);
 
                 unestimatedInvoice.UserInvoices.Add(unestimatedUserInvoice);
             }
@@ -111,6 +111,13 @@ namespace Wendy.Tasks.Extensions
             }
 
             return sum;
+        }
+
+        public static ulong Sum(this ConsumptionValue consumption)
+        {
+            Contract.Requires(consumption != null);
+
+            return consumption.Estimated + consumption.Real;
         }
 
         public static bool IsSumOfUserInvoicesDifferent(this InvoiceShared invoice, Func<InvoiceShared, ulong> commonSum, Func<UserInvoice, ulong> usersSum)

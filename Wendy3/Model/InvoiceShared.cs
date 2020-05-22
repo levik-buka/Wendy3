@@ -12,7 +12,7 @@ namespace Wendy.Model
         public bool Balanced { get; set; }
 
         [Newtonsoft.Json.JsonProperty("CommonInvoice")]
-        private Invoice CommonInvoice { get; set; }
+        public Invoice CommonInvoice { get; private set; }
         public List<UserInvoice> UserInvoices { get; } = new List<UserInvoice>();
 
         public InvoiceShared(long id, DateTime startDate, DateTime? endDate) 
@@ -64,9 +64,20 @@ namespace Wendy.Model
             return CommonInvoice.GetUsageFee();
         }
 
-        public TotalFee GetTotalFee(decimal VAT)
+        public FeeConfig GetFeeConfig()
         {
-            return CommonInvoice.GetTotalFee(VAT);
+            return CommonInvoice.GetFeeConfig();
+        }
+
+        public void SetFeeConfig(FeeConfig feeConfig)
+        {
+            CommonInvoice.SetFeeConfig(feeConfig);
+            UserInvoices.ForEach(userInvoice => userInvoice.SetFeeConfig(feeConfig));
+        }
+
+        public TotalFee GetTotalFee()
+        {
+            return CommonInvoice.GetTotalFee();
         }
     }
 }

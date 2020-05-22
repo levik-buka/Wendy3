@@ -32,13 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainGrid));
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.selectedSumStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tulostaBtn = new System.Windows.Forms.Button();
-            this.asetuksetBtn = new System.Windows.Forms.Button();
-            this.tasauslaskuBtn = new System.Windows.Forms.Button();
-            this.arviolaskuBtn = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Aikajakso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Asunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,6 +41,13 @@
             this.Käyttömaksut = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tasauslasku = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Loppusumma = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.selectedSumStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tulostaBtn = new System.Windows.Forms.Button();
+            this.asetuksetBtn = new System.Windows.Forms.Button();
+            this.tasauslaskuBtn = new System.Windows.Forms.Button();
+            this.arviolaskuBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -93,6 +93,65 @@
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(815, 441);
             this.dataGridView.TabIndex = 0;
+            this.dataGridView.SelectionChanged += new System.EventHandler(this.DataGridView_SelectionChanged);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
+            // Aikajakso
+            // 
+            this.Aikajakso.HeaderText = "Aikajakso";
+            this.Aikajakso.Name = "Aikajakso";
+            this.Aikajakso.ReadOnly = true;
+            // 
+            // Asunto
+            // 
+            this.Asunto.HeaderText = "Asunto";
+            this.Asunto.Name = "Asunto";
+            this.Asunto.ReadOnly = true;
+            // 
+            // Lukema
+            // 
+            this.Lukema.HeaderText = "Lukema (m3) arvio/oikea";
+            this.Lukema.Name = "Lukema";
+            this.Lukema.ReadOnly = true;
+            // 
+            // Kulutus
+            // 
+            this.Kulutus.HeaderText = "Kulutus (m3) arvio/oikea";
+            this.Kulutus.Name = "Kulutus";
+            this.Kulutus.ReadOnly = true;
+            // 
+            // Perusmaksut
+            // 
+            this.Perusmaksut.HeaderText = "Perusmaksut vesi/jäte/yhteensä";
+            this.Perusmaksut.Name = "Perusmaksut";
+            this.Perusmaksut.ReadOnly = true;
+            // 
+            // Käyttömaksut
+            // 
+            this.Käyttömaksut.HeaderText = "Käyttömaksut vesi/jäte/yhteensä";
+            this.Käyttömaksut.Name = "Käyttömaksut";
+            this.Käyttömaksut.ReadOnly = true;
+            // 
+            // Tasauslasku
+            // 
+            this.Tasauslasku.HeaderText = "Tasauslasku";
+            this.Tasauslasku.Name = "Tasauslasku";
+            this.Tasauslasku.ReadOnly = true;
+            this.Tasauslasku.Width = 70;
+            // 
+            // Loppusumma
+            // 
+            this.Loppusumma.HeaderText = "Loppusumma alviton/alvillinen";
+            this.Loppusumma.Name = "Loppusumma";
+            this.Loppusumma.ReadOnly = true;
+            this.Loppusumma.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Loppusumma.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // statusStrip
             // 
@@ -163,64 +222,6 @@
             this.arviolaskuBtn.Text = "Uusi &arviolasku";
             this.arviolaskuBtn.UseVisualStyleBackColor = true;
             // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            // 
-            // Aikajakso
-            // 
-            this.Aikajakso.HeaderText = "Aikajakso";
-            this.Aikajakso.Name = "Aikajakso";
-            this.Aikajakso.ReadOnly = true;
-            // 
-            // Asunto
-            // 
-            this.Asunto.HeaderText = "Asunto";
-            this.Asunto.Name = "Asunto";
-            this.Asunto.ReadOnly = true;
-            // 
-            // Lukema
-            // 
-            this.Lukema.HeaderText = "Lukema (m3) arvio/oikea";
-            this.Lukema.Name = "Lukema";
-            this.Lukema.ReadOnly = true;
-            // 
-            // Kulutus
-            // 
-            this.Kulutus.HeaderText = "Kulutus (m3) arvio/oikea";
-            this.Kulutus.Name = "Kulutus";
-            this.Kulutus.ReadOnly = true;
-            // 
-            // Perusmaksut
-            // 
-            this.Perusmaksut.HeaderText = "Perusmaksut vesi/jäte/yhteensä";
-            this.Perusmaksut.Name = "Perusmaksut";
-            this.Perusmaksut.ReadOnly = true;
-            // 
-            // Käyttömaksut
-            // 
-            this.Käyttömaksut.HeaderText = "Käyttömaksut vesi/jäte/yhteensä";
-            this.Käyttömaksut.Name = "Käyttömaksut";
-            this.Käyttömaksut.ReadOnly = true;
-            // 
-            // Tasauslasku
-            // 
-            this.Tasauslasku.HeaderText = "Tasauslasku";
-            this.Tasauslasku.Name = "Tasauslasku";
-            this.Tasauslasku.ReadOnly = true;
-            this.Tasauslasku.Width = 70;
-            // 
-            // Loppusumma
-            // 
-            this.Loppusumma.HeaderText = "Loppusumma alviton/alvillinen";
-            this.Loppusumma.Name = "Loppusumma";
-            this.Loppusumma.ReadOnly = true;
-            this.Loppusumma.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Loppusumma.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // MainGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,6 +234,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainGrid";
             this.Text = "Wendy 3";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainGrid_FormClosing);
             this.Load += new System.EventHandler(this.MainGrid_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.statusStrip.ResumeLayout(false);

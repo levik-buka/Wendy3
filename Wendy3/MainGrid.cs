@@ -55,6 +55,45 @@ namespace Wendy
             ShowInvoiceHistory(invoiceHistory);
         }
 
+        private void MainGrid_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!anyChangesToInvoiceHistory) return;
+
+            if (MessageBox.Show("Tallennetaanko muutokset?", "Lopetus", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                == DialogResult.Yes)
+            {
+                try
+                {
+                    File.Move(@"wendy.json", @"wendy.json.bak");
+                }
+                catch (FileNotFoundException) { }
+
+                string json = JsonUtil.SerializeToJson(invoiceHistory);
+                File.WriteAllText(@"wendy.json", json);
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Delete:
+                    {
+                        DeleteSelectedInvoices();
+                        return true;
+                    }
+
+                case Keys.Escape:
+                    {
+                        Close();
+                        return true;
+                    }
+
+                default:
+                    return false;
+            }
+        }
+
         private void ShowInvoiceHistory(InvoiceHistory invoiceHistory)
         {
             dataGridView.Rows.Clear();
@@ -86,6 +125,7 @@ namespace Wendy
             row.DefaultCellStyle.BackColor = Color.LightCyan;
 
             row.Cells[0].Value = invoice.Id;
+            row.Cells[0].Tag = invoice.Id;
             row.Cells[1].Value = invoice.PeriodToString();
             row.Cells[2].Value = "Yhteinen";
             row.Cells[3].Value = invoice.GetReadOut().ToString();
@@ -108,7 +148,9 @@ namespace Wendy
             row.CreateCells(dataGridView);
 
             row.Cells[0].Value = userInvoice.InvoiceOwner;
+            row.Cells[0].Tag = invoice.Id;
             row.Cells[1].Style.BackColor = Color.LightGray;
+
             row.Cells[2].Value = userInvoice.InvoiceOwner;
 
             row.Cells[3].Value = userInvoice.GetReadOut().ToString();
@@ -153,30 +195,12 @@ namespace Wendy
             selectedSumStatus.Text = string.Empty;
         }
 
-        private void MainGrid_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (!anyChangesToInvoiceHistory) return;
-
-            if (MessageBox.Show("Tallennetaanko muutokset?", "Lopetus", MessageBoxButtons.YesNo, MessageBoxIcon.Question) 
-                == DialogResult.Yes)
-            {
-                try
-                {
-                    File.Move(@"wendy.json", @"wendy.json.bak");
-                }
-                catch (FileNotFoundException) { }
-
-                string json = JsonUtil.SerializeToJson(invoiceHistory);
-                File.WriteAllText(@"wendy.json", json);
-            }
-        }
-
         private void DataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            CalculateSumOfSelectedRows();
+            CalculateSumOfSelectedInvoices();
         }
 
-        private void CalculateSumOfSelectedRows()
+        private void CalculateSumOfSelectedInvoices()
         {
             decimal VATLessSum = 0;
             decimal withVATSum = 0;
@@ -191,5 +215,59 @@ namespace Wendy
             selectedSumStatus.Text = String.Format(new NumberFormatInfo(), $"{VATLessSum:C2} + {(withVATSum - VATLessSum):C2} (alv) = {withVATSum:C2}");
         }
 
+        private void DeleteSelectedInvoices()
+        {
+            if (dataGridView.SelectedRows.Count == 0) return;
+
+            if (MessageBox.Show("Poistetaanko valitut laskut?", "Posto", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                == DialogResult.No)
+            {
+                return;
+            }
+
+            anyChangesToInvoiceHistory = true;
+
+            foreach (DataGridViewRow row in dataGridView.SelectedRows)
+            {
+                InvoiceShared invoice = GetCommonInvoiceFromRow(row);
+
+                if (IsUserInvoice(row))
+                {
+                    UserInvoice userInvoice = GetUserInvoiceFromRow(row);
+                    invoice.UserInvoices.Remove(userInvoice);
+                }
+                else
+                {
+                    foreach (var userInvoice in invoice.UserInvoices)
+                    {
+                        // removing user invoices from datagrid
+                        dataGridView.Rows.RemoveAt(row.Index + 1);
+                    }
+
+                    invoiceHistory.Invoices.Remove(invoice);
+                }
+
+                dataGridView.Rows.Remove(row);
+            }
+        }
+
+        private InvoiceShared GetCommonInvoiceFromRow(DataGridViewRow row)
+        {
+            long invoiceId = (long)row.Cells[0].Tag;
+            return invoiceHistory.Invoices.GetInvoiceById(invoiceId);
+        }
+
+        private UserInvoice GetUserInvoiceFromRow(DataGridViewRow row)
+        {
+            if (IsUserInvoice(row) == false) return null;
+
+            return row.Tag as UserInvoice;
+        }
+
+        private bool IsUserInvoice(DataGridViewRow row)
+        {
+            // tag is invoice id, value is owner name for user invoices
+            return row.Cells[0].Value is string;
+        }
     }
 }

@@ -10,8 +10,18 @@ using System.Xml.Serialization;
 
 namespace Wendy.Tasks.Utils
 {
+    /// <summary>
+    /// XML utilities
+    /// </summary>
     public static class XmlUtil
     {
+        /// <summary>
+        /// Deserialize XML document
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="xmlDoc"></param>
+        /// <param name="nameSpace"></param>
+        /// <returns></returns>
         public static T DeserializeXML<T>(string xmlDoc, string nameSpace)
         {
             Contract.Requires(xmlDoc != null);
@@ -24,6 +34,13 @@ namespace Wendy.Tasks.Utils
             }
         }
 
+        /// <summary>
+        /// Deserialize XML from text reader
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="xmlReader"></param>
+        /// <param name="nameSpace"></param>
+        /// <returns></returns>
         public static T DeserializeXML<T>(TextReader xmlReader, string nameSpace)
         {
             Contract.Requires(xmlReader != null);

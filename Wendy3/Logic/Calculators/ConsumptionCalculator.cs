@@ -9,10 +9,17 @@ using Wendy.Tasks.Extensions;
 
 namespace Wendy.Logic.Calculators
 {
+    /// <summary>
+    /// Water consumption calculator. Calculates real consumption and estimated if not available
+    /// </summary>
     public class ConsumptionCalculator
     {
         private readonly InvoiceHistory invoiceHistory;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="invoiceHistory"></param>
         public ConsumptionCalculator(InvoiceHistory invoiceHistory)
         {
             Contract.Requires(invoiceHistory != null);
@@ -20,6 +27,9 @@ namespace Wendy.Logic.Calculators
             this.invoiceHistory = invoiceHistory;
         }
 
+        /// <summary>
+        /// Calculate water consumption for all invoice history
+        /// </summary>
         public void CalculateConsumption()
         {
             Contract.Requires(invoiceHistory != null);
@@ -34,6 +44,11 @@ namespace Wendy.Logic.Calculators
             }
         }
 
+        /// <summary>
+        /// Calculate water consumption of specific invoice
+        /// </summary>
+        /// <param name="invoiceId"></param>
+        /// <returns></returns>
         public ulong CalculateConsumption(int invoiceId)
         {
             Contract.Requires(invoiceHistory != null);

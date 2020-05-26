@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
+#pragma warning disable CS1591
+
 namespace Wendy.Model.Wendy1
 {
     public class OldUsers

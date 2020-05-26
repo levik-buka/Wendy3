@@ -6,11 +6,24 @@ using System.Threading.Tasks;
 
 namespace Wendy.Model
 {
+    /// <summary>
+    /// Meter configuration
+    /// </summary>
     public class MeterConfig : DateRange
     {
+        /// <summary>
+        /// read out on start of the period
+        /// </summary>
         public ulong StartReadOut { get; set; }
+        /// <summary>
+        /// read out (if available) on end of the period
+        /// </summary>
         public ulong? EndReadOut { get; set; }
 
+        /// <summary>
+        /// Create empty meter configuration
+        /// </summary>
+        /// <returns></returns>
         public static MeterConfig CreateEmpty()
         {
             return new MeterConfig {
@@ -20,6 +33,10 @@ namespace Wendy.Model
             };
         }
 
+        /// <summary>
+        /// Returns consumption of the period
+        /// </summary>
+        /// <returns></returns>
         public long GetConsumption()
         {
             return Convert.ToInt64((EndReadOut ?? 0L) - StartReadOut);

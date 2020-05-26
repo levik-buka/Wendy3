@@ -11,10 +11,17 @@ using Wendy.Tasks.Extensions;
 
 namespace Wendy.Logic.Calculators
 {
+    /// <summary>
+    /// Fee calculator
+    /// </summary>
     public class FeeCalculator
     {
         private readonly InvoiceHistory invoiceHistory;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="invoiceHistory"></param>
         public FeeCalculator(InvoiceHistory invoiceHistory)
         {
             Contract.Requires(invoiceHistory != null);
@@ -22,6 +29,9 @@ namespace Wendy.Logic.Calculators
             this.invoiceHistory = invoiceHistory;
         }
 
+        /// <summary>
+        /// Calculate water fees for whole invoice history
+        /// </summary>
         public void CalculateFees()
         {
             Contract.Requires(invoiceHistory != null);
@@ -29,6 +39,10 @@ namespace Wendy.Logic.Calculators
             invoiceHistory.Invoices.ForEach(CalculateFee);
         }
 
+        /// <summary>
+        /// Calculate water fee of specific invoice
+        /// </summary>
+        /// <param name="invoiceId"></param>
         public void CalculateFee(int invoiceId)
         {
             Contract.Requires(invoiceHistory != null);
@@ -42,6 +56,10 @@ namespace Wendy.Logic.Calculators
             CalculateFee(invoice);
         }
 
+        /// <summary>
+        /// Calculate water fee of specific invoice
+        /// </summary>
+        /// <param name="invoice"></param>
         public void CalculateFee(InvoiceShared invoice)
         {
             Contract.Requires(invoice != null);

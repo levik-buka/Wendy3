@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Wendy.Model
 {
+    /// <summary>
+    /// User's meter configuration history
+    /// </summary>
     public class UserMeterConfigHistory : MeterConfigHistory
     {
+        /// <summary>
+        /// Name of meter's user
+        /// </summary>
         public string MeterUser { get; set; }
     }
 }

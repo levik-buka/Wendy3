@@ -1,5 +1,8 @@
 ﻿namespace Wendy
 {
+    /// <summary>
+    /// Grid view of invoice history
+    /// </summary>
     partial class MainGrid
     {
         /// <summary>

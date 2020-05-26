@@ -7,14 +7,26 @@ using System.Threading.Tasks;
 
 namespace Wendy.Model
 {
+    /// <summary>
+    /// Meter's read-out
+    /// </summary>
     public class ConsumptionReadOut
     {
+        /// <summary>
+        /// Read-out date
+        /// </summary>
         public DateTime ReadOutDate { get; }
         [Newtonsoft.Json.JsonProperty("ReadOut")] // needed because of private
         private ConsumptionValue ReadOut { get; set; }
         [Newtonsoft.Json.JsonProperty("Consumption")]   // needed because of private set
         private ConsumptionValue Consumption { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="readOutDate"></param>
+        /// <param name="estimatedReadout"></param>
+        /// <param name="realReadOut"></param>
         public ConsumptionReadOut(DateTime readOutDate, ulong estimatedReadout, ulong realReadOut)
         {
             ReadOutDate = readOutDate;
@@ -22,6 +34,10 @@ namespace Wendy.Model
             Consumption = new ConsumptionValue(0, 0);
         }
 
+        /// <summary>
+        /// Return read-outs
+        /// </summary>
+        /// <returns></returns>
         public ConsumptionValue GetReadOut()
         {
             Contract.Ensures(ReadOut != null);
@@ -29,6 +45,10 @@ namespace Wendy.Model
             return ReadOut;
         }
 
+        /// <summary>
+        /// Return consumption
+        /// </summary>
+        /// <returns></returns>
         public ConsumptionValue GetConsumption()
         {
             Contract.Ensures(Consumption != null);

@@ -8,8 +8,16 @@ using Wendy.Tasks.Extensions;
 
 namespace Wendy.Tasks.Converters
 {
+    /// <summary>
+    /// Old wendy file converter
+    /// </summary>
     public static class OldWendyFileConverter
     {
+        /// <summary>
+        /// Convert old wendy file to invoice history model
+        /// </summary>
+        /// <param name="oldWendyData"></param>
+        /// <returns></returns>
         public static Model.InvoiceHistory ToInvoiceHistory(Model.Wendy1.OldWendyFile oldWendyData)
         {
             Contract.Requires(oldWendyData != null);

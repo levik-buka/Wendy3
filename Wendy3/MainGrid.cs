@@ -17,6 +17,8 @@ using Wendy.Model;
 using Wendy.Tasks.Extensions;
 using Wendy.Tasks.Utils;
 
+#pragma warning disable CA1303 // #warning directive
+
 namespace Wendy
 {
     public partial class MainGrid : Form
@@ -24,6 +26,9 @@ namespace Wendy
         private InvoiceHistory invoiceHistory;
         private bool anyChangesToInvoiceHistory = false;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public MainGrid()
         {
             InitializeComponent();
@@ -73,6 +78,12 @@ namespace Wendy
             }
         }
 
+        /// <summary>
+        /// Process special keys: delete, escape
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
@@ -257,14 +268,14 @@ namespace Wendy
             return invoiceHistory.Invoices.GetInvoiceById(invoiceId);
         }
 
-        private UserInvoice GetUserInvoiceFromRow(DataGridViewRow row)
+        private static UserInvoice GetUserInvoiceFromRow(DataGridViewRow row)
         {
             if (IsUserInvoice(row) == false) return null;
 
             return row.Tag as UserInvoice;
         }
 
-        private bool IsUserInvoice(DataGridViewRow row)
+        private static bool IsUserInvoice(DataGridViewRow row)
         {
             // tag is invoice id, value is owner name for user invoices
             return row.Cells[0].Value is string;

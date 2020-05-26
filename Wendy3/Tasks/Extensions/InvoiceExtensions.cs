@@ -8,8 +8,17 @@ using Wendy.Model;
 
 namespace Wendy.Tasks.Extensions
 {
+    /// <summary>
+    /// Extension methods for invoices
+    /// </summary>
     public static class InvoiceExtensions
     {
+        /// <summary>
+        /// Get invoice by id
+        /// </summary>
+        /// <param name="invoices"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static Model.InvoiceShared GetInvoiceById(this IEnumerable<Model.InvoiceShared> invoices, long id)
         {
             Contract.Requires(invoices != null);
@@ -17,6 +26,12 @@ namespace Wendy.Tasks.Extensions
             return invoices.FirstOrDefault(invoice => invoice.Id == id);
         }
 
+        /// <summary>
+        /// Get user invoice by user
+        /// </summary>
+        /// <param name="invoices"></param>
+        /// <param name="owner"></param>
+        /// <returns></returns>
         public static Model.UserInvoice GetInvoiceByOwner(this IEnumerable<Model.UserInvoice> invoices, string owner)
         {
             Contract.Requires(invoices != null);
@@ -24,6 +39,12 @@ namespace Wendy.Tasks.Extensions
             return invoices.FirstOrDefault(invoice => invoice.InvoiceOwner == owner);
         }
 
+        /// <summary>
+        /// Get list of user invoices by user
+        /// </summary>
+        /// <param name="invoices"></param>
+        /// <param name="owner"></param>
+        /// <returns></returns>
         public static IEnumerable<Model.UserInvoice> GetUserInvoicesByOwner(this IEnumerable<Model.InvoiceShared> invoices, string owner)
         {
             Contract.Requires(invoices != null);
@@ -31,6 +52,12 @@ namespace Wendy.Tasks.Extensions
             return invoices.Select(invoice => invoice.UserInvoices.GetInvoiceByOwner(owner));
         }
 
+        /// <summary>
+        /// Get invoice by end date
+        /// </summary>
+        /// <param name="invoices"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
         public static Model.InvoiceShared GetInvoiceByEndDate(this IEnumerable<Model.InvoiceShared> invoices, DateTime endDate)
         {
             Contract.Requires(invoices != null);
@@ -38,6 +65,12 @@ namespace Wendy.Tasks.Extensions
             return invoices.FirstOrDefault(invoice => invoice.End == endDate);
         }
 
+        /// <summary>
+        /// Calculate read-out period by previous and next invoices
+        /// </summary>
+        /// <param name="prevInvoice"></param>
+        /// <param name="invoice"></param>
+        /// <returns></returns>
         public static Model.DateRange GetReadOutPeriod(Model.InvoiceShared prevInvoice, Model.InvoiceShared invoice)
         {
             Contract.Requires(invoice != null);
@@ -45,6 +78,12 @@ namespace Wendy.Tasks.Extensions
             return new Model.DateRange { Start = prevInvoice?.GetReadOutDate().AddDays(1) ?? invoice.Start, End = invoice.GetReadOutDate() };
         }
 
+        /// <summary>
+        /// Return list of estimated invoices in the period
+        /// </summary>
+        /// <param name="invoices"></param>
+        /// <param name="period"></param>
+        /// <returns></returns>
         public static IEnumerable<Model.InvoiceShared> GetEstimatedInvoicesInPeriod(this IEnumerable<Model.InvoiceShared> invoices, Model.DateRange period)
         {
             Contract.Requires(invoices != null);
@@ -91,6 +130,13 @@ namespace Wendy.Tasks.Extensions
             return unestimatedInvoice;
         }
 
+        /// <summary>
+        /// Calculate ulong sum of functor
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="invoices"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
         public static ulong Sum<T>(this IEnumerable<T> invoices, Func<T, ulong> selector)
         {
             Contract.Requires(invoices != null);
@@ -100,6 +146,11 @@ namespace Wendy.Tasks.Extensions
             return sum;
         }
 
+        /// <summary>
+        /// Calculate ulong sum
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static ulong Sum(this IEnumerable<ulong> source)
         {
             Contract.Requires(source != null);
@@ -113,6 +164,11 @@ namespace Wendy.Tasks.Extensions
             return sum;
         }
 
+        /// <summary>
+        /// Calculate consumption sum
+        /// </summary>
+        /// <param name="consumption"></param>
+        /// <returns></returns>
         public static ulong Sum(this ConsumptionValue consumption)
         {
             Contract.Requires(consumption != null);
@@ -120,6 +176,13 @@ namespace Wendy.Tasks.Extensions
             return consumption.Estimated + consumption.Real;
         }
 
+        /// <summary>
+        /// Checks if sum of user invoices differs from sum of common invoice
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <param name="commonSum"></param>
+        /// <param name="usersSum"></param>
+        /// <returns></returns>
         public static bool IsSumOfUserInvoicesDifferent(this InvoiceShared invoice, Func<InvoiceShared, ulong> commonSum, Func<UserInvoice, ulong> usersSum)
         {
             Contract.Requires(invoice != null);
@@ -132,6 +195,13 @@ namespace Wendy.Tasks.Extensions
             return invoiceSum != userSum;
         }
 
+        /// <summary>
+        /// Checks if sum of user invoices differs from sum of common invoice
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <param name="commonSum"></param>
+        /// <param name="usersSum"></param>
+        /// <returns></returns>
         public static bool IsSumOfUserInvoicesDifferent(this InvoiceShared invoice, Func<InvoiceShared, decimal> commonSum, Func<UserInvoice, decimal> usersSum)
         {
             Contract.Requires(invoice != null);

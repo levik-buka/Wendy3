@@ -57,7 +57,7 @@ namespace Wendy
                 }
             }
 
-            ShowInvoiceHistory(invoiceHistory);
+            ShowInvoiceHistory(invoiceHistory, GetPriceShowFormat());
         }
 
         private void MainGrid_FormClosing(object sender, FormClosingEventArgs e)
@@ -105,7 +105,7 @@ namespace Wendy
             }
         }
 
-        private void ShowInvoiceHistory(InvoiceHistory invoiceHistory)
+        private void ShowInvoiceHistory(InvoiceHistory invoiceHistory, Price.ShowFormat priceFormat)
         {
             dataGridView.Rows.Clear();
 
@@ -116,23 +116,54 @@ namespace Wendy
                 FeeConfig feeConfig = invoiceHistory.FeeConfigHistory.GetFeeConfigHistoryForPeriod(invoice).FirstOrDefault();
                 invoice.SetFeeConfig(feeConfig);
 
-                ShowCommonInvoice(invoice);
-
-                foreach(UserInvoice userInvoice in invoice.UserInvoices)
-                {
-                    ShowUserInvoice(invoice, userInvoice);
-                }
+                ShowSharedInvoice(invoice, priceFormat);
             }
 
             dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 
-        private void ShowCommonInvoice(InvoiceShared invoice)
+        private void RefreshDataGridViewRows(DataGridViewRowCollection rows, Price.ShowFormat priceFormat)
         {
+            foreach(DataGridViewRow row in rows)
+            {
+                InvoiceShared invoice = GetCommonInvoiceFromRow(row);
+
+                if (IsUserInvoice(row))
+                {
+                    ShowUserInvoice(row, invoice, GetUserInvoiceFromRow(row), priceFormat);
+                }
+                else
+                {
+                    ShowCommonInvoice(row, invoice, priceFormat);
+                }
+            }
+        }
+
+
+        private void ShowSharedInvoice(InvoiceShared invoice, Price.ShowFormat priceFormat)
+        {
+            DataGridViewRow row = new DataGridViewRow();
+            row.CreateCells(dataGridView);
+
+            ShowCommonInvoice(row, invoice, priceFormat);
+            dataGridView.Rows.Add(row);
+
+            foreach (UserInvoice userInvoice in invoice.UserInvoices)
+            {
+                row = new DataGridViewRow();
+                row.CreateCells(dataGridView);
+
+                ShowUserInvoice(row, invoice, userInvoice, priceFormat);
+                dataGridView.Rows.Add(row);
+            }
+        }
+
+
+        private static void ShowCommonInvoice(DataGridViewRow row, InvoiceShared invoice, Price.ShowFormat priceFormat)
+        {
+            Contract.Requires(row != null);
             Contract.Requires(invoice != null);
 
-            var row = new DataGridViewRow();
-            row.CreateCells(dataGridView);
             row.DefaultCellStyle.BackColor = Color.LightCyan;
 
             row.Cells[0].Value = invoice.Id;
@@ -141,22 +172,19 @@ namespace Wendy
             row.Cells[2].Value = "Yhteinen";
             row.Cells[3].Value = invoice.GetReadOut().ToString();
             row.Cells[4].Value = invoice.GetConsumption().ToString();
-            row.Cells[5].Value = invoice.GetBasicFee().ToString();
-            row.Cells[6].Value = invoice.GetUsageFee().ToString();
+            row.Cells[5].Value = invoice.GetBasicFee().ToString(priceFormat);
+            row.Cells[6].Value = invoice.GetUsageFee().ToString(priceFormat);
             row.Cells[7].Value = invoice.Balanced;
-            row.Cells[8].Value = invoice.GetTotalFee().ToString();
+            row.Cells[8].Value = invoice.GetTotalPrice().ToString(Price.ShowFormat.both);
 
             row.Tag = invoice.CommonInvoice;
-            dataGridView.Rows.Add(row);
         }
 
-        private void ShowUserInvoice(InvoiceShared invoice, UserInvoice userInvoice)
+        private static void ShowUserInvoice(DataGridViewRow row, InvoiceShared invoice, UserInvoice userInvoice, Price.ShowFormat priceFormat)
         {
+            Contract.Requires(row != null);
             Contract.Requires(invoice != null);
             Contract.Requires(userInvoice != null);
-
-            var row = new DataGridViewRow();
-            row.CreateCells(dataGridView);
 
             row.Cells[0].Value = userInvoice.InvoiceOwner;
             row.Cells[0].Tag = invoice.Id;
@@ -172,28 +200,27 @@ namespace Wendy
             row.Cells[4].Style.BackColor = invoice.IsSumOfUserInvoicesDifferent(inv => inv.GetConsumption().Sum(), userInv => userInv.GetConsumption().Sum()) ?
                 Color.LightPink : row.Cells[4].Style.BackColor;
             
-            row.Cells[5].Value = userInvoice.GetBasicFee().ToString();
+            row.Cells[5].Value = userInvoice.GetBasicFee().ToString(priceFormat);
             row.Cells[5].Style.BackColor = invoice.IsSumOfUserInvoicesDifferent(
-                    inv => (inv.GetBasicFee().GetTotalFee(inv.GetFeeConfig().VAT).VATLessFee), 
-                    userInv => (userInv.GetBasicFee().GetTotalFee(userInv.GetFeeConfig().VAT).VATLessFee)) ?
+                    inv => (inv.GetBasicFee().GetTotalPrice().VATLess), 
+                    userInv => (userInv.GetBasicFee().GetTotalPrice().VATLess)) ?
                 Color.LightPink : row.Cells[5].Style.BackColor;
             
-            row.Cells[6].Value = userInvoice.GetUsageFee().ToString();
+            row.Cells[6].Value = userInvoice.GetUsageFee().ToString(priceFormat);
             row.Cells[6].Style.BackColor = invoice.IsSumOfUserInvoicesDifferent(
-                    inv => (inv.GetUsageFee().GetTotalFee(inv.GetFeeConfig().VAT).VATLessFee), 
-                    userInv => (userInv.GetUsageFee().GetTotalFee(userInv.GetFeeConfig().VAT).VATLessFee)) ?
+                    inv => (inv.GetUsageFee().GetTotalPrice().VATLess), 
+                    userInv => (userInv.GetUsageFee().GetTotalPrice().VATLess)) ?
                 Color.LightPink : row.Cells[6].Style.BackColor;
             
             row.Cells[7].Value = invoice.Balanced;
             
-            row.Cells[8].Value = userInvoice.GetTotalFee().ToString();
+            row.Cells[8].Value = userInvoice.GetTotalPrice().ToString(Price.ShowFormat.both);
             row.Cells[8].Style.BackColor = invoice.IsSumOfUserInvoicesDifferent(
-                    inv => (inv.GetTotalFee().VATLessFee + inv.GetTotalFee().WithVAT),
-                    userInv => (userInv.GetTotalFee().VATLessFee + userInv.GetTotalFee().WithVAT)) ?
+                    inv => (inv.GetTotalPrice().VATLess + inv.GetTotalPrice().WithVAT),
+                    userInv => (userInv.GetTotalPrice().VATLess + userInv.GetTotalPrice().WithVAT)) ?
                 Color.LightPink : row.Cells[8].Style.BackColor;
 
             row.Tag = userInvoice;
-            dataGridView.Rows.Add(row);
         }
 
         private void ShowErrorStatus(Exception ex, string description)
@@ -219,8 +246,8 @@ namespace Wendy
             foreach (DataGridViewRow row in dataGridView.SelectedRows)
             {
                 Invoice invoice = row.Tag as Invoice;
-                VATLessSum += invoice.GetTotalFee().VATLessFee;
-                withVATSum += invoice.GetTotalFee().WithVAT;
+                VATLessSum += invoice.GetTotalPrice().VATLess;
+                withVATSum += invoice.GetTotalPrice().WithVAT;
             }
 
             selectedSumStatus.Text = String.Format(new NumberFormatInfo(), $"{VATLessSum:C2} + {(withVATSum - VATLessSum):C2} (alv) = {withVATSum:C2}");
@@ -249,7 +276,7 @@ namespace Wendy
                 }
                 else
                 {
-                    foreach (var userInvoice in invoice.UserInvoices)
+                    foreach (var _ in invoice.UserInvoices)
                     {
                         // removing user invoices from datagrid
                         dataGridView.Rows.RemoveAt(row.Index + 1);
@@ -280,5 +307,19 @@ namespace Wendy
             // tag is invoice id, value is owner name for user invoices
             return row.Cells[0].Value is string;
         }
+
+        private Price.ShowFormat GetPriceShowFormat()
+        {
+            if (showPricesWithVAT.Checked) return Price.ShowFormat.withVAT;
+
+            return Price.ShowFormat.withoutVAT;
+        }
+
+        private void showPricesWithVAT_CheckedChanged(object sender, EventArgs e)
+        {
+            RefreshDataGridViewRows(dataGridView.Rows, GetPriceShowFormat());
+        }
+
+
     }
 }

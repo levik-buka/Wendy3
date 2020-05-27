@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wendy.Tasks.Extensions;
 
 namespace Wendy.Model
 {
@@ -13,13 +15,16 @@ namespace Wendy.Model
     public class WaterFee
     {
         /// <summary>
-        /// VATless clean water fee
+        /// Clean water fee without VAT
         /// </summary>
         public decimal CleanWaterFee { get; set; }
         /// <summary>
-        /// VATless waste water fee
+        /// Waste water fee without VAT
         /// </summary>
         public decimal WasteWaterFee { get; set; }
+
+        [JsonIgnore]
+        public decimal VAT { get; set; } = 1m;
 
         /// <summary>
         /// 
@@ -47,18 +52,40 @@ namespace Wendy.Model
         /// <returns></returns>
         public override string ToString()
         {
+            return ToString(Price.ShowFormat.withoutVAT);
+        }
+
+        public string ToString(Price.ShowFormat fmt)
+        {
             return String.Format(new NumberFormatInfo(), 
-                $"{CleanWaterFee,10:C2} / {WasteWaterFee,10:C2} / {(CleanWaterFee + WasteWaterFee),10:C2}");
+                $"{GetCleanWaterPrice().ToString(fmt)} / {GetWasteWaterPrice().ToString(fmt)} / {GetTotalPrice().ToString(fmt)}");
         }
 
         /// <summary>
         /// Calculates total sum of water fee
         /// </summary>
-        /// <param name="VAT"></param>
         /// <returns></returns>
-        public TotalFee GetTotalFee(decimal VAT)
+        public Price GetTotalPrice()
         {
-            return new TotalFee(CleanWaterFee + WasteWaterFee, VAT);
+            return new Price(CleanWaterFee + WasteWaterFee, VAT);
+        }
+
+        /// <summary>
+        /// Return clean wate price with or without VAT
+        /// </summary>
+        /// <returns></returns>
+        public Price GetCleanWaterPrice()
+        {
+            return new Price(CleanWaterFee, VAT);
+        }
+
+        /// <summary>
+        /// Return waste water price with or without price
+        /// </summary>
+        /// <returns></returns>
+        public Price GetWasteWaterPrice()
+        {
+            return new Price(WasteWaterFee, VAT);
         }
     }
 }

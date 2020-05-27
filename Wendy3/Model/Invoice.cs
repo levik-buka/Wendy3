@@ -22,8 +22,6 @@ namespace Wendy.Model
         [Newtonsoft.Json.JsonProperty("UsageFee")]   // needed because of private set
         private WaterFee UsageFee { get; set; }
 
-        private FeeConfig feeConfig;
-
         /// <summary>
         /// 
         /// </summary>
@@ -93,35 +91,24 @@ namespace Wendy.Model
         }
 
         /// <summary>
-        /// Return fee plan used by invoice
-        /// </summary>
-        /// <returns></returns>
-        public FeeConfig GetFeeConfig()
-        {
-            return feeConfig;
-        }
-
-        /// <summary>
         /// Set fee plan used by invoice
         /// </summary>
         /// <param name="feeConfig"></param>
         public void SetFeeConfig(FeeConfig feeConfig)
         {
-            this.feeConfig = feeConfig;
+            Contract.Requires(feeConfig != null);
+
+            BasicFee.VAT = feeConfig.VAT;
+            UsageFee.VAT = feeConfig.VAT;
         }
 
         /// <summary>
         /// Return total water fee of invoice
         /// </summary>
         /// <returns></returns>
-        public TotalFee GetTotalFee()
+        public Price GetTotalPrice()
         {
-            if (feeConfig == null)
-            {
-                throw new InvalidOperationException("Invoice without knowledge about fee configuration");
-            }
-
-            return new TotalFee(GetBasicFee().GetTotalFee(feeConfig.VAT).VATLessFee + GetUsageFee().GetTotalFee(feeConfig.VAT).VATLessFee, feeConfig.VAT);
+            return new Price(GetBasicFee().GetTotalPrice().VATLess + GetUsageFee().GetTotalPrice().VATLess, BasicFee.VAT);
         }
 
     }

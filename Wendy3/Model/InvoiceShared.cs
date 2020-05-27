@@ -107,15 +107,6 @@ namespace Wendy.Model
         }
 
         /// <summary>
-        /// Return fee plan used by invoice
-        /// </summary>
-        /// <returns></returns>
-        public FeeConfig GetFeeConfig()
-        {
-            return CommonInvoice.GetFeeConfig();
-        }
-
-        /// <summary>
         /// Set fee plan used by invoice
         /// </summary>
         /// <param name="feeConfig"></param>
@@ -129,9 +120,9 @@ namespace Wendy.Model
         /// Return total water fee of common invoice
         /// </summary>
         /// <returns></returns>
-        public TotalFee GetTotalFee()
+        public Price GetTotalPrice()
         {
-            return CommonInvoice.GetTotalFee();
+            return CommonInvoice.GetTotalPrice();
         }
     }
 }

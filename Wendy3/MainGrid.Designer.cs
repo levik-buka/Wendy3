@@ -51,6 +51,7 @@
             this.asetuksetBtn = new System.Windows.Forms.Button();
             this.tasauslaskuBtn = new System.Windows.Forms.Button();
             this.arviolaskuBtn = new System.Windows.Forms.Button();
+            this.showPricesWithVAT = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -176,6 +177,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.showPricesWithVAT);
             this.groupBox1.Controls.Add(this.tulostaBtn);
             this.groupBox1.Controls.Add(this.asetuksetBtn);
             this.groupBox1.Controls.Add(this.tasauslaskuBtn);
@@ -225,6 +227,17 @@
             this.arviolaskuBtn.Text = "Uusi &arviolasku";
             this.arviolaskuBtn.UseVisualStyleBackColor = true;
             // 
+            // showPricesWithVAT
+            // 
+            this.showPricesWithVAT.AutoSize = true;
+            this.showPricesWithVAT.Location = new System.Drawing.Point(7, 79);
+            this.showPricesWithVAT.Name = "showPricesWithVAT";
+            this.showPricesWithVAT.Size = new System.Drawing.Size(99, 17);
+            this.showPricesWithVAT.TabIndex = 4;
+            this.showPricesWithVAT.Text = "verolliset hinnat";
+            this.showPricesWithVAT.UseVisualStyleBackColor = true;
+            this.showPricesWithVAT.CheckedChanged += new System.EventHandler(this.showPricesWithVAT_CheckedChanged);
+            // 
             // MainGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -243,6 +256,7 @@
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -267,6 +281,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Käyttömaksut;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Tasauslasku;
         private System.Windows.Forms.DataGridViewTextBoxColumn Loppusumma;
+        private System.Windows.Forms.CheckBox showPricesWithVAT;
     }
 }
 

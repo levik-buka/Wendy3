@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wendy.Tasks.Extensions;
 
 namespace Wendy.Model
 {
@@ -119,12 +120,12 @@ namespace Wendy.Model
 
         private decimal GetVATInMonthlyFees()
         {
-            return VATIncludedIntoMonthlyFees ? 1m : (1m + (VAT / 100));
+            return VATIncludedIntoMonthlyFees ? 1m : VAT.VATPercentToDecimal();
         }
 
         private decimal GetVAT()
         {
-            return VATIncludedIntoMonthlyFees ? (1m + (VAT / 100)) : 1m;
+            return VATIncludedIntoMonthlyFees ? VAT.VATPercentToDecimal() : 1m;
         }
     }
 }

@@ -73,5 +73,26 @@ namespace Wendy.Tasks.Extensions
         {
             return Math.Round(fee, 2);
         }
+
+        /// <summary>
+        /// Calculate price with VAT
+        /// </summary>
+        /// <param name="VATLessFee"></param>
+        /// <param name="VAT"></param>
+        /// <returns></returns>
+        public static decimal AddVAT(this decimal VATLessFee, decimal VAT)
+        {
+            return VATLessFee * VAT.VATPercentToDecimal();
+        }
+
+        /// <summary>
+        /// Converts VAT percent to decimal presentation
+        /// </summary>
+        /// <param name="VAT"></param>
+        /// <returns></returns>
+        public static decimal VATPercentToDecimal(this decimal VAT)
+        {
+            return (1m + VAT / 100);
+        }
     }
 }

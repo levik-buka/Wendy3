@@ -23,6 +23,9 @@ namespace Wendy.Model
         /// </summary>
         public decimal WasteWaterFee { get; set; }
 
+        /// <summary>
+        /// VAT percentage
+        /// </summary>
         [JsonIgnore]
         public decimal VAT { get; set; } = 1m;
 
@@ -47,7 +50,7 @@ namespace Wendy.Model
         }
 
         /// <summary>
-        /// 
+        /// Print price without VAT
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -55,6 +58,11 @@ namespace Wendy.Model
             return ToString(Price.ShowFormat.withoutVAT);
         }
 
+        /// <summary>
+        /// Formating printed prices 
+        /// </summary>
+        /// <param name="fmt"></param>
+        /// <returns></returns>
         public string ToString(Price.ShowFormat fmt)
         {
             return String.Format(new NumberFormatInfo(), 

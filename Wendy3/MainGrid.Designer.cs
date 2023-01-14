@@ -3,7 +3,7 @@
     /// <summary>
     /// Grid view of invoice history
     /// </summary>
-    partial class MainGrid
+    internal partial class MainGrid
     {
         /// <summary>
         /// Required designer variable.
@@ -236,7 +236,7 @@
             this.showPricesWithVAT.TabIndex = 4;
             this.showPricesWithVAT.Text = "verolliset hinnat";
             this.showPricesWithVAT.UseVisualStyleBackColor = true;
-            this.showPricesWithVAT.CheckedChanged += new System.EventHandler(this.showPricesWithVAT_CheckedChanged);
+            this.showPricesWithVAT.CheckedChanged += new System.EventHandler(this.ShowPricesWithVAT_CheckedChanged);
             // 
             // MainGrid
             // 

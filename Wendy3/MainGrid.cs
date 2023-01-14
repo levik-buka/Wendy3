@@ -17,14 +17,14 @@ using Wendy.Model;
 using Wendy.Tasks.Extensions;
 using Wendy.Tasks.Utils;
 
-#pragma warning disable CA1303 // #warning directive
+//#pragma warning disable CA1303 // #warning directive
 
 namespace Wendy
 {
-    public partial class MainGrid : Form
+    internal partial class MainGrid : Form
     {
         private InvoiceHistory invoiceHistory;
-        private bool anyChangesToInvoiceHistory = false;
+        private bool anyChangesToInvoiceHistory;
 
         /// <summary>
         /// Default constructor
@@ -228,11 +228,6 @@ namespace Wendy
             selectedSumStatus.Text = description + " " + ex.Message;
         }
 
-        private void ClearErrorStatus()
-        {
-            selectedSumStatus.Text = string.Empty;
-        }
-
         private void DataGridView_SelectionChanged(object sender, EventArgs e)
         {
             CalculateSumOfSelectedInvoices();
@@ -315,7 +310,7 @@ namespace Wendy
             return Price.ShowFormat.withoutVAT;
         }
 
-        private void showPricesWithVAT_CheckedChanged(object sender, EventArgs e)
+        private void ShowPricesWithVAT_CheckedChanged(object sender, EventArgs e)
         {
             RefreshDataGridViewRows(dataGridView.Rows, GetPriceShowFormat());
         }

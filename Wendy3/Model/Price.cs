@@ -10,10 +10,22 @@ namespace Wendy.Model
     /// </summary>
     public class Price
     {
+        /// <summary>
+        /// Price printing formats
+        /// </summary>
         public enum ShowFormat
         {
+            /// <summary>
+            /// Print price without VAT
+            /// </summary>
             withoutVAT,
+            /// <summary>
+            /// Print price with VAT
+            /// </summary>
             withVAT,
+            /// <summary>
+            /// Print price with and without VAT
+            /// </summary>
             both
         }
 
@@ -44,6 +56,10 @@ namespace Wendy.Model
             this.VATLess = VATLessPrice;
         }
 
+        /// <summary>
+        /// Print price without VAT
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return ToString(ShowFormat.withoutVAT);

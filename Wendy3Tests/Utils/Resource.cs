@@ -16,17 +16,24 @@ namespace Wendy3Tests.Utils
         /// Load resource file to a stirng
         ///</summary>
         ///<param name="fileName"></param>
-        ///<returns></returns>
+        ///<returns>empty string if no resource found</returns>
         public static string GetResourceAsString(string fileName)
         {
-            var assembly = System.Reflection.Assembly.GetCallingAssembly();
-            string name = assembly.GetName().Name;
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetCallingAssembly();
+            
+            string name = assembly.GetName().Name ?? string.Empty;
+            Stream? resourceStream = assembly.GetManifestResourceStream(name + "." + fileName);
 
-            using (var reader = new StreamReader(assembly.GetManifestResourceStream(name + "." + fileName)))
+            if (resourceStream != null)
             {
-                string asString = reader.ReadToEnd();
-                return asString;
+                using (var reader = new StreamReader(resourceStream))
+                {
+                    string asString = reader.ReadToEnd();
+                    return asString;
+                }
             }
+
+            return string.Empty;
         }
     }
 }

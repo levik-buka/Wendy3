@@ -18,7 +18,7 @@ namespace Wendy
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            using var form = new MainGrid();
+            using var form = new Dao.Client.MainGrid();
             Application.Run(form);
         }
     }
